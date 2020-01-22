@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>scramble | founder-to-founder growth financing community</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="scramble" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="founder-to-founder growth financing community" />
+<meta property="og:description" content="founder-to-founder growth financing community" />
+<link rel="canonical" href="https://scrambleup.com/" />
+<meta property="og:url" content="https://scrambleup.com/" />
+<meta property="og:site_name" content="scramble" />
+<script type="application/ld+json">
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://scrambleup.com/favicon.png"}},"headline":"scramble","description":"founder-to-founder growth financing community","@type":"WebSite","name":"scramble","url":"https://scrambleup.com/","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/styles.css"><link type="application/atom+xml" rel="alternate" href="https://scrambleup.com/feed.xml" title="scramble" /><!--[if lt IE 8]>
+  <link rel="stylesheet" href="assets/ie7/ie7.css">
+  <![endif]-->
+
+</head>
+<body class="loading"><header id="header" class="scrolled-in">
+  <nav id="main">
+    <div class="logo">
+      <a href="#header"><i class="scramble scramble-logo"></i></a>
+      <!-- <p class="title">We&nbsp;are a&nbsp;friendly source for additional finance</p> -->
+      <p class="title">Introducing supplementary founder financing</p>
+    </div>
+    <div id="menu">
+      <div>
+        <div class="dots">
+        
+          <a href="#about"><i class="scramble scramble-dot"></i></a>
+        
+          <a href="#problem"><i class="scramble scramble-dot"></i></a>
+        
+          <a href="#solution"><i class="scramble scramble-dot"></i></a>
+        
+          <a href="#features"><i class="scramble scramble-dot"></i></a>
+        
+          <a href="#contact"><i class="scramble scramble-dot"></i></a>
+        
+        </div>
+        <div class="links">
+        
+          <a href="#about">Who we are</a>
+        
+          <a href="#problem">Problem</a>
+        
+          <a href="#solution">Solution</a>
+        
+          <a href="#features">Features</a>
+        
+          <a href="#contact">Contact us</a>
+        
+        </div>
+      </div>
+    </div>
+    <a id="login-o" class="dot" href="#">Login</a>
+  </nav>
+</header><div id="login" class="hidden">
+  <div class="login-wrapper">
+    <div class="header">
+      <div class="logo">
+        <i class="scramble scramble-logo"></i>
+      </div>
+      <a id="login-c" class="dot" href="#"><i class="scramble scramble-cross"></i></a>
+    </div>
+    <div class="slide">
+      <div class="row" style="justify-content: center;">
+        <div class="col20">
+          <form>
+            <label class="small">Login</label>
+            <input type="username" placeholder="Enter username">
+            <label class="small">Password</label>
+            <input type="password" placeholder="Enter password">
+            <br>
+            <a type="submit" class="btn-outline-circle">Login</a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</div>
+<div id="bg-animations" class="header">
+  <div class="dot"></div>
+</div>
+<main class="page-content" aria-label="Content">
+
+      <section id="header">
+  <div class="slide"></div>
+  <script type="text/javascript" src="assets/effects.js"></script>
+  <script type="module">
+    const imgSize = [800, 800];
+
+    const vertex = `
+					attribute vec2 uv;
+					attribute vec2 position;
+					varying vec2 vUv;
+					void main() {
+							vUv = uv;
+							gl_Position = vec4(position, 0, 1);
+					}
+			`;
+    const fragment = `
+					precision highp float;
+					precision highp int;
+					uniform sampler2D tWater;
+					uniform sampler2D tFlow;
+					uniform float uTime;
+					varying vec2 vUv;
+					uniform vec4 res;
+
+					void main() {
+
+							// R and G values are velocity in the x and y direction
+							// B value is the velocity length
+							vec3 flow = texture2D(tFlow, vUv).rgb;
+
+							vec2 uv = .5 * gl_FragCoord.xy / res.xy ;
+							vec2 myUV = (uv - vec2(0.5))*res.zw + vec2(0.5);
+							myUV -= flow.xy * (0.15 * 0.7);
+
+							vec3 tex = texture2D(tWater, myUV).rgb;
+
+							gl_FragColor = vec4(tex.r, tex.g, tex.b, 1.0);
+					}
+			`;
+    {
+      const renderer = new ogl.Renderer({ dpr: 2 });
+      const gl = renderer.gl;
+      document.querySelector('#bg-animations').appendChild(gl.canvas);
+
+      // Variable inputs to control flowmap
+      let aspect = 1;
+      const mouse = new ogl.Vec2(-1);
+      const velocity = new ogl.Vec2();
+      function resize() {
+        let a1, a2;
+        var imageAspect = imgSize[1] / imgSize[0];
+        if (window.innerHeight / window.innerWidth > imageAspect) {
+          a1 = 1;
+          a2 = window.innerHeight / window.innerWidth / imageAspect;
+        } else {
+          a1 = (window.innerWidth / window.innerHeight) * imageAspect;
+          a2 = 1;
+        }
+        mesh.program.uniforms.res.value = new ogl.Vec4(
+          window.innerWidth,
+          window.innerHeight,
+          a1,
+          a2
+        );
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        aspect = window.innerWidth / window.innerHeight;
+      }
+      const flowmap = new ogl.Flowmap(gl);
+      // Triangle that includes -1 to 1 range for 'position', and 0 to 1 range for 'uv'.
+      const geometry = new ogl.Geometry(gl, {
+        position: {
+          size: 2,
+          data: new Float32Array([-1, -1, 3, -1, -1, 3])
+        },
+        uv: { size: 2, data: new Float32Array([0, 0, 2, 0, 0, 2]) }
+      });
+      const texture = new ogl.Texture(gl, {
+        minFilter: gl.LINEAR,
+        magFilter: gl.LINEAR
+      });
+      const img = new Image();
+      img.onload = () => (texture.image = img);
+      img.crossOrigin = "Anonymous";
+      img.src = "/assets/img/dot.png";
+
+      let a1, a2;
+      var imageAspect = imgSize[1] / imgSize[0];
+      if (window.innerHeight / window.innerWidth < imageAspect) {
+        a1 = 1;
+        a2 = window.innerHeight / window.innerWidth / imageAspect;
+      } else {
+        a1 = (window.innerWidth / window.innerHeight) * imageAspect;
+        a2 = 1;
+      }
+
+      const program = new ogl.Program(gl, {
+        vertex,
+        fragment,
+        uniforms: {
+          uTime: { value: 0 },
+          tWater: { value: texture },
+          res: {
+            value: new ogl.Vec4(window.innerWidth, window.innerHeight, a1, a2)
+          },
+          img: { value: new ogl.Vec2(imgSize[0], imgSize[1]) },
+          // Note that the uniform is applied without using an object and value property
+          // This is because the class alternates this texture between two render targets
+          // and updates the value property after each render.
+          tFlow: flowmap.uniform
+        }
+      });
+      const mesh = new ogl.Mesh(gl, { geometry, program });
+
+      window.addEventListener("resize", resize, false);
+      resize();
+
+      // Create handlers to get mouse position and velocity
+      const isTouchCapable = "ontouchstart" in window;
+      if (isTouchCapable) {
+        window.addEventListener("touchstart", updateMouse, false);
+        window.addEventListener("touchmove", updateMouse, { passive: false });
+      } else {
+        window.addEventListener("mousemove", updateMouse, false);
+      }
+      let lastTime;
+      const lastMouse = new ogl.Vec2();
+      function updateMouse(e) {
+        //e.preventDefault();
+        if (e.changedTouches && e.changedTouches.length) {
+          e.x = e.changedTouches[0].pageX;
+          e.y = e.changedTouches[0].pageY;
+        }
+        if (e.x === undefined) {
+          e.x = e.pageX;
+          e.y = e.pageY;
+        }
+        // Get mouse value in 0 to 1 range, with y flipped
+        mouse.set(e.x / gl.renderer.width, 1.0 - e.y / gl.renderer.height);
+        // Calculate velocity
+        if (!lastTime) {
+          // First frame
+          lastTime = performance.now();
+          lastMouse.set(e.x, e.y);
+        }
+
+        const deltaX = e.x - lastMouse.x;
+        const deltaY = e.y - lastMouse.y;
+
+        lastMouse.set(e.x, e.y);
+
+        let time = performance.now();
+
+        // Avoid dividing by 0
+        let delta = Math.max(10.4, time - lastTime);
+        lastTime = time;
+        velocity.x = deltaX / delta;
+        velocity.y = deltaY / delta;
+        // Flag update to prevent hanging velocity values when not moving
+        velocity.needsUpdate = true;
+      }
+      requestAnimationFrame(update);
+      function update(t) {
+        requestAnimationFrame(update);
+        // Reset velocity when mouse not moving
+        if (!velocity.needsUpdate) {
+          mouse.set(-1);
+          velocity.set(0);
+        }
+        velocity.needsUpdate = false;
+        // Update flowmap inputs
+        flowmap.aspect = aspect;
+        flowmap.mouse.copy(mouse);
+        // Ease velocity input, slower when fading out
+        flowmap.velocity.lerp(velocity, velocity.len ? 0.15 : 0.1);
+        flowmap.update();
+        program.uniforms.uTime.value = t * 0.01;
+        renderer.render({ scene: mesh });
+      }
+    }
+  </script>
+</section>
+<section id="about">
+  <div class="slide">
+    <p class="headline">Meet <b>scramble</b>&nbsp;&mdash; a&nbsp;founder-to-founder growth financing community. We&nbsp;provide supplementary founder financing at&nbsp;the earliest stages where money from investors and creditors isn&rsquo;t readily available</p>
+  </div>
+</section>
+<section id="problem">
+  <div class="slide">
+    <div class="row">
+      <div class="col40">
+        <p class="headline">For a&nbsp;growth founder, fundraising is&nbsp;the core business process</p>
+        <p>Most early stage start-ups are &laquo;default dead&raquo;:<br>they will cease to&nbsp;exist unless founders raise capital.</p>
+      </div>
+      <div class="col60">
+        <div class="row">
+          <div class="col25">
+          </div>
+          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+            <div class="dot"></div>
+          </div>
+          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+            <div class="dot"></div>
+          </div>
+          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+            <div class="dot"></div>
+          </div>
+          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+            <div class="dot"></div>
+          </div>
+          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+            <div class="dot"></div>
+          </div>
+          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+            <div class="dot"></div>
+          </div>
+          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col40">
+        <div class="row>">
+          <div class="col40" style="position: relative;">
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col60">
+        <div class="row">
+          <div class="col50" style="padding:0;">
+            <div style="display: flex; align-items: flex-start; margin-top: 1rem; margin-bottom: 1rem;">
+              <div style="font-size: 5rem; font-weight: 400; line-height: 0.8;"><p>15-50</p></div>
+              <div style="font-size: 2rem; font-weight: 400;line-height: 1;"><p>%</p></div>
+            </div>
+            <p style="margin-left: .75rem;">your time dealing with fundraising<br> one way or&nbsp;another </p>
+          </div>
+          <div class="col25" style="position: relative;">
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    function shuffleArray(array) {
+      for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    }
+    let p_dots_type = ['coin', 'watch'];
+    // let p_dots_tooltip = ['Good time!', 'Bad time!'];
+    let p_dots_type_length = p_dots_type.length;
+    let p_dots = document.querySelectorAll("#problem .slide .dot");
+    let p_dots_types_list = Array(p_dots.length).fill(0).fill(1,(p_dots.length / 2).toFixed(0));
+    shuffleArray(p_dots_types_list);
+
+    p_dots.forEach( function(item, i) {
+      item.classList.add(p_dots_type[p_dots_types_list[i]]);
+      // let tooltip = document.createElement('span');
+      // tooltip.innerHTML = p_dots_tooltip[p_dots_types_list[i]];
+      // tooltip.className = "tooltip hide";
+
+      item.addEventListener('click', function(e) {
+        item.classList.toggle('clicked');
+        // tooltip.classList.remove('hide');
+        // setTimeout(function () {
+        //   tooltip.classList.add('hide');
+        // }, 1000);
+      }, false);
+    });
+  </script>
+</section>
+<section id="problem1">
+  <div class="slide">
+    <div class="row">
+      <div class="col50">
+        <p class="headline">Supplementary founder financing dramatically changes fundraising outcomes</p>
+        <p style="padding-right: 9rem;">Fundraising is&nbsp;time-consuming and erratic. Convenient access to&nbsp;supplementary financing helps founder stay in&nbsp;control. When you&rsquo;re not scrambling to&nbsp;fundraise, you have more capacity to&nbsp;work on&nbsp;the business.
+        </p>
+        <p class="spoiler" style="padding-right: 9rem;">You understand customers better, design products better, hire people better, and yes, can afford to&nbsp;accept only good offers from investors</p>
+      </div>
+      <div class="col50">
+        <div class="row">
+          <div class="col66" style="position: relative; margin-left: 5rem;">
+            <div class="dot coin"></div>
+            <!-- <div class="dot"></div> -->
+            <!-- <span class="tooltip">Find investor,<br>if you have time</span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+  let spoilers = document.querySelectorAll(".spoiler");
+  spoilers.forEach(function(item) {
+    item.insertAdjacentHTML('afterend', '<p class="toggle"><i class="scramble scramble-dot"></i><i class="scramble scramble-dot"></i><i class="scramble scramble-dot"></i></p>');
+    item.nextSibling.addEventListener('click', function(e) {
+      item.classList.toggle('more');
+    }, false);
+  });
+  </script>
+</section>
+<section id="solution">
+  <div class="slide">
+    <div class="row">
+      <div class="col55">
+        <p class="headline"><b>scramble</b> is&nbsp;the founder-driven platform for supplementary financing</p>
+      </div>
+      <div class="col33" style="margin: 0.7rem 0 0 -0.6rem;">
+        <p class="lead">We&nbsp;provide supplementary financing to&nbsp;founders<br> in&nbsp;a&nbsp;three-step process</p>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col90" style="margin: auto; padding-top: 1rem;">
+        <ol class="dot">
+          <li class="col33">
+            Platform jointly with member founders forms and develops high-trust founder community
+          </li>
+          <li class="col33">
+            Platform pre-approves credit limit to&nbsp;each founder based on&nbsp;employability in&nbsp;case current business fails
+          </li>
+          <li class="col33">
+            Founders decide who is&nbsp;actually funded using mutual repayment guarantees
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="solution1">
+  <div class="slide">
+    <div class="row">
+      <div class="col40">
+        <p class="headline">High-trust founder community</p>
+      </div>
+      <div class="col40" style="margin: 0.7rem 0 0 0;">
+        <p>Trust among founder members is&nbsp;at&nbsp;the heart of&nbsp;the value that <b>scramble</b> platform provides. We&nbsp;invite new member founders based on&nbsp;their proven integrity, competence, and willingness to&nbsp;help other founders succeed.</p>
+      </div>
+    </div>
+    <div id="s1_faces" class="row" style="margin-top: 5rem;"><div class="col20">
+        <div class="btn-face">
+          <div class="bg face-1" data-face="url('/assets/img/face1.png')"></div>
+          <video muted playsinline>
+            <source src="/assets/img/bg-yellow/face1.mp4" type="video/mp4"></source>
+          </video>
+          <!-- <span class="tooltip hide">Hi, I'm James Franco <i class="">1</i></span> -->
+          <div class="add"></div>
+        </div>
+      </div><div class="col20">
+        <div class="btn-face">
+          <div class="bg face-6" data-face="url('/assets/img/face6.png')"></div>
+          <video muted playsinline>
+            <source src="/assets/img/bg-yellow/face6.mp4" type="video/mp4"></source>
+          </video>
+          <!-- <span class="tooltip hide">Hi, I'm <br>Joshua Doe <br><i class="">6</i></span> -->
+          <div class="add"></div>
+        </div>
+      </div><div class="col20">
+        <div class="btn-face">
+          <div class="bg face-3" data-face="url('/assets/img/face3.png')"></div>
+          <video muted playsinline>
+            <source src="/assets/img/bg-yellow/face3.mp4" type="video/mp4"></source>
+          </video>
+          <!-- <span class="tooltip hide">Hi, I'm Don Franco <i class="">3</i></span> -->
+          <div class="add"></div>
+        </div>
+      </div><div class="col20">
+        <div class="btn-face">
+          <div class="bg face-4" data-face="url('/assets/img/face4.png')"></div>
+          <video muted playsinline>
+            <source src="/assets/img/bg-yellow/face4.mp4" type="video/mp4"></source>
+          </video>
+          <!-- <span class="tooltip hide">Hi, I'm Felicia Franco <i class="">4</i></span> -->
+          <div class="add"></div>
+        </div>
+      </div><div class="col20">
+        <div class="btn-face">
+          <div class="bg face-5" data-face="url('/assets/img/face5.png')"></div>
+          <video muted playsinline>
+            <source src="/assets/img/bg-yellow/face5.mp4" type="video/mp4"></source>
+          </video>
+          <!-- <span class="tooltip hide">Hi, I'm <br>Joshua Doe <br><i class="">5</i></span> -->
+          <div class="add"></div>
+        </div>
+      </div></div>
+  </div>
+  <script type="text/javascript">
+    let s1_faces = document.querySelector("#s1_faces");
+    let s1_face_adds = s1_faces.querySelectorAll("#solution1 .btn-face .add");
+    s1_face_adds.forEach(function(face_add) {
+      let face = face_add.parentNode;
+      let face_video = face.querySelector("video");
+      // let face_tooltip = face.querySelector(".tooltip");
+
+      face_add.addEventListener('click', function(e) {
+        face.classList.toggle("selected");
+        face.classList.add("playing");
+        // face_tooltip.classList.remove("hide");
+        if(s1_faces.querySelectorAll(".btn-face.selected").length > 0) {
+          s1_faces.classList.add("selected");
+        } else {
+          s1_faces.classList.remove("selected");
+        }
+        face_video.play();
+      });
+      face_video.addEventListener('ended', function(e) {
+        face.classList.remove("playing");
+        // face_tooltip.classList.add("hide");
+      });
+    });
+  </script>
+</section>
+<section id="solution2">
+  <div class="slide">
+    <div class="row">
+      <div class="col40" style="padding-top: 3rem;">
+        <p class="headline">Mutual repayment guarantee is&nbsp;your calculated bet on&nbsp;the fountders you personally trust</p>
+      </div>
+      <div class="col60">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 50">
+          <defs>
+            <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10"></path>
+            </marker>
+          </defs>
+          <g fill="none" stroke="black" stroke-width="2" marker-end="url(#arrowhead)">
+            <path id="arrow-1" d="M100,45 Q 200,-40 300,45">
+              <animate attributeType="XML" attributeName="d"
+                      begin="2s" dur="2s" fill="remove" repeatCount="indefinite"
+                      keyTimes="0;0.2;0.4;0.6;0.8;1"
+                      values="M100,45 Q 100,45 105,40;
+                              M100,45 Q 125,25 150,13;
+                              M100,45 Q 150,5 200,5;
+                              M100,45 Q 175,-20 250,13;
+                              M100,45 Q 200,-40 300,45;
+                              M100,45 Q 200,-40 300,45;" />
+            </path>
+          </g>
+        </svg>
+        <div class="row">
+          <div class="col40">
+            <div class="btn-face">
+              <div class="bg face-1"></div>
+              <video muted playsinline>
+                <source src="/assets/img/bg-yellow/face1.mp4" type="video/mp4"></source>
+              </video>
+            </div>
+          </div>
+          <div class="col40" style="margin-left: auto">
+            <div class="btn-face">
+              <div class="bg face-6"></div>
+              <video muted playsinline>
+                <source src="/assets/img/bg-yellow/face6.mp4" type="video/mp4"></source>
+              </video>
+            </div>
+          </div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 50">
+          <defs>
+            <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10"></path>
+            </marker>
+          </defs>
+          <g fill="none" stroke="black" stroke-width="2" marker-end="url(#arrowhead)">
+            <path id="arrow-1" d="M300,5 Q 200,90 100,5">
+              <animate attributeType="XML" attributeName="d"
+                      begin="2s" dur="2s" fill="remove" repeatCount="indefinite"
+                      keyTimes="0;0.2;0.4;0.6;0.8;1"
+                      values="M300,5 Q 300,5 295,10;
+                              M300,5 Q 275,25 250,35;
+                              M300,5 Q 250,45 200,45;
+                              M300,5 Q 225,70 150,35;
+                              M300,5 Q 200,90 100,5;
+                              M300,5 Q 200,90 100,5;" /></path></g>
+        </svg>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col50" style="display: flex; margin-top: -4rem;">
+        <ul class="sm-dot">
+          <li class="col50">Founders agree to&nbsp;repay for each other if&nbsp;eihter company fails and the other one succeeds</li>
+          <li class="col50">Swaps can be&nbsp;done monthly across all founders on&nbsp;the platform</li>
+          <li class="col50">If&nbsp;both companies fail, unpaid amount is&nbsp;picked by&nbsp;founders as&nbsp;individuals</li>
+          <li class="col50">No&nbsp;more than&nbsp;25% of&nbsp;the loan amount per one swap partner</li>
+        </ul>
+        <a class="btn-add"><i class="scramble scramble-plus"></i></a>
+      </div>
+      <div class="col10">
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    let s2_ul_sm_dot = document.querySelector("#solution2 ul.sm-dot");
+    let s2_svg = document.querySelectorAll("#solution2 svg");
+    let s2_face_videos = document.querySelectorAll("#solution2 .btn-face video");
+
+    s2_svg.forEach(function(svg) {
+      svg.pauseAnimations();
+    });
+    document.querySelector("#solution2 .btn-add").addEventListener('click', function(e) {
+      // console.log(s2_svg)
+      s2_svg.forEach(function(svg) {
+        svg.animationsPaused() ? svg.unpauseAnimations() : svg.pauseAnimations();
+      });
+      s2_face_videos.forEach(function(v) {
+        v.play();
+      });
+      this.classList.toggle('visible');
+      s2_ul_sm_dot.classList.toggle('visible');
+
+    });
+
+  </script>
+</section>
+
+
+
+<section id="solution3">
+  <div class="slide">
+    <div class="row">
+      <div class="col50" style="position: relative;">
+        <div class="s3_targets active">
+          <p class="headline">Your financing works well in&nbsp;case of&nbsp;both company success and failure</p>
+          <p></p>
+        </div>
+        <div class="s3_targets">
+          <p class="headline">If&nbsp;my&nbsp;company succeeds</p>
+          <!-- <p>In&nbsp;this case, even if&nbsp;all pairs of&nbsp;swaps fail, the cost of&nbsp;money will still be&nbsp;10&nbsp;times lower than for equity investments</p> -->
+          <p>Worst case, I&nbsp;repay 2x&nbsp;the original loan. Even if&nbsp;all of&nbsp;my&nbsp;swap pairs fail, cost of&nbsp;money is&nbsp;still 10x lower than for an&nbsp;equity investment</p>
+        </div>
+        <div class="s3_targets">
+          <p class="headline">If&nbsp;my&nbsp;company fails</p>
+          <!-- <p <p>at&nbsp;least part (if&nbsp;not all) of&nbsp;my&nbsp;debt will be&nbsp;repaid <br>by&nbsp;successful swap pairs</p> -->
+          <p>Best case, all of&nbsp;my&nbsp;debt is&nbsp;repaid by&nbsp;my&nbsp;swap pairs. While my&nbsp;own business may fail, I&nbsp;will end up&nbsp;with little to&nbsp;no&nbsp;outstanding debt</p>
+        </div>
+        <div style="padding: 7rem;"></div>
+      </div>
+      <div class="col50">
+        <div class="row">
+          <div class="col33">
+          </div>
+          <div class="col33">
+            <a class="btn-outline-circle" data-target="1">Success</a>
+          </div>
+          <div class="col33">
+            <a class="btn-outline-circle" data-target="2">Failure</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row faces">
+      <div class="col30" style="position: relative;">
+        <div class="row">
+          <div class="col40"style="margin-top: 5rem;">
+            <div id="s3-arrow-6" class="left" style="width: 14rem; height: 2rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115 16">
+                <defs>
+                  <marker id="startarrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 5 L 10 0 L 10 10"></path>
+                  </marker>
+                  <marker id="endarrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 0 L 10 5 L 0 10"></path>
+                  </marker>
+                </defs>
+                <path fill="none" stroke="black" stroke-width="1.5" marker-end="url(#endarrow)" d="M110,5 Q 50,20 5,5">
+                  
+                </path>
+              </svg>
+            </div>
+            <div class="btn-face">
+              <div class="bg face-6"></div>
+              <video muted playsinline>
+                <source src="/assets/img/bg-yellow/face6.mp4" type="video/mp4"></source>
+              </video>
+            </div>
+          </div>
+          <div class="col40">
+            <div id="s3-arrow-7" class="left"  style="width: 6rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 20">
+                <defs>
+                  <marker id="startarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 5 L 10 0 L 10 10"></path>
+                  </marker>
+                  <marker id="endarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 0 L 10 5 L 0 10"></path>
+                  </marker>
+                </defs>
+                <path fill="none" stroke="black" stroke-width="1.5" marker-end="url(#endarrow)" d="M45,15 Q 35,5 5,5">
+                  
+                </path>
+              </svg>
+            </div>
+            <div class="btn-face">
+              <div class="bg face-7"></div>
+              <video muted playsinline>
+                <source src="/assets/img/bg-yellow/face7.mp4" type="video/mp4"></source>
+              </video>
+            </div>
+          </div>
+          <div class="col40" style="margin: auto;">
+            <div id="s3-arrow-3" class="left"  style="margin-top: 0; width: 9rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 25">
+                <defs>
+                  <marker id="startarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 5 L 10 0 L 10 10"></path>
+                  </marker>
+                  <marker id="endarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 0 L 10 5 L 0 10"></path>
+                  </marker>
+                </defs>
+                <path fill="none" stroke="black" stroke-width="1.5" marker-end="url(#endarrow)" d="M65,5 Q 40,20 5,20">
+                  
+                </path>
+              </svg>
+            </div>
+            <div class="btn-face">
+              <div class="bg face-3"></div>
+              <video muted playsinline>
+                <source src="/assets/img/bg-yellow/face3.mp4" type="video/mp4"></source>
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col25">
+        <div class="btn-face">
+          <div class="bg face-1"></div>
+          <video muted playsinline>
+            <source src="/assets/img/bg-yellow/face1.mp4" type="video/mp4"></source>
+          </video>
+        </div>
+      </div>
+      <div class="col30" style="position: relative; margin-left: 3rem;">
+        <div class="row faces">
+          <div class="col40">
+            <div id="s3-arrow-2" class="right" style="width: 5rem; margin-left: -5rem; height:2rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 16">
+                <defs>
+                  <marker id="startarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 5 L 10 0 L 10 10"></path>
+                  </marker>
+                  <marker id="endarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 0 L 10 5 L 0 10"></path>
+                  </marker>
+                </defs>
+                <path fill="none" stroke="black" stroke-width="1.5" marker-end="url(#endarrow)" d="M5,15 Q 20,5 35,5">
+                  
+                </path>
+              </svg>
+            </div>
+            <div class="btn-face">
+              <div class="bg face-2"></div>
+              <video muted playsinline>
+                <source src="/assets/img/bg-yellow/face2.mp4" type="video/mp4"></source>
+              </video>
+            </div>
+          </div>
+          <div class="col40" style="margin-top: 4rem; margin-left: auto;">
+            <div id="s3-arrow-5" class="right" style="width: 18rem; margin-left: -18rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 22">
+                <defs>
+                  <marker id="startarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 5 L 10 0 L 10 10"></path>
+                  </marker>
+                  <marker id="endarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 0 L 10 5 L 0 10"></path>
+                  </marker>
+                </defs>
+                <path fill="none" stroke="black" stroke-width="1.5" marker-end="url(#endarrow)" d="M5,10 Q 70,20 140,5">
+                  
+                </path>
+              </svg>
+            </div>
+            <div class="btn-face">
+              <div class="bg face-5"></div>
+              <video muted playsinline>
+                <source src="/assets/img/bg-yellow/face5.mp4" type="video/mp4"></source>
+              </video>
+            </div>
+          </div>
+          <div class="col40"style="margin-left: 4rem;">
+            <div id="s3-arrow-4" class="right" style="width: 10rem; margin-left: -10rem; margin-top: 1rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 30">
+                <defs>
+                  <marker id="startarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 5 L 10 0 L 10 10"></path>
+                  </marker>
+                  <marker id="endarrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+                    <path d="M 0 0 L 10 5 L 0 10"></path>
+                  </marker>
+                </defs>
+                <path fill="none" stroke="black" stroke-width="1.5" marker-end="url(#endarrow)" d="M3,2 Q 30,20 75,25">
+                
+                </path>
+              </svg>
+            </div>
+            <div class="btn-face">
+              <div class="bg face-4"></div>
+              <video muted playsinline>
+                <source src="/assets/img/bg-yellow/face4.mp4" type="video/mp4"></source>
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+  let s3_controls = document.querySelectorAll("#solution3 a.btn-outline-circle");
+  let s3_controls_targets = document.querySelectorAll("#solution3 div.s3_targets");
+  let s3_faces = document.querySelector("#solution3 div.faces");
+  let s3_svg = document.querySelectorAll("#solution3 svg");
+  let s3_svg_p = document.querySelectorAll("#solution3 svg path");
+  let s3_v_1 = s3_faces.querySelectorAll(".btn-face .bg.face-1+video");
+  let s3_v_2 = s3_faces.querySelectorAll(".btn-face .bg:not(.face-1)+video");
+  s3_svg.forEach(function(svg) {
+    svg.style.opacity = 0;
+    svg.pauseAnimations();
+  });
+  s3_controls.forEach(function(item) {
+    item.addEventListener('mouseover', function(e) {
+      // console.log("in");
+
+      s3_controls_targets.forEach(function(target) {
+        target.classList.remove("active");
+      });
+      s3_svg.forEach(function(svg) {
+        svg.style.opacity = 1;
+        // svg.unpauseAnimations();
+      });
+      if(item.dataset.target-1) {
+        s3_faces.classList.add( "failure" );
+        s3_faces.classList.remove( "success" );
+        s3_v_2.forEach(function(v) {v.play();});
+        // console.log("in 1");
+
+      } else {
+        s3_faces.classList.add( "success" );
+        s3_faces.classList.remove( "failure" );
+        s3_v_1.forEach(function(v) {v.play();});
+        // console.log("in 2");
+      }
+      s3_svg_p.forEach(function(p) {
+        if(item.dataset.target-1) {
+          p.setAttribute( "marker-start", "url(#startarrow)");
+          p.setAttribute( "marker-end", "");
+        } else {
+          p.setAttribute( "marker-end",  "url(#endarrow)");
+          p.setAttribute( "marker-start",  "");
+        }
+      });
+      s3_controls_targets[item.dataset.target].classList.add("active");
+    }, false);
+    item.addEventListener('mouseout', function(e) {
+      // console.log("out");
+      s3_faces.classList.remove( "failure" );
+      s3_faces.classList.remove( "success" );
+      s3_v_1.forEach(function(v) {v.pause(); v.currentTime=0;});
+      s3_v_2.forEach(function(v) {v.pause(); v.currentTime=0;});
+
+      s3_controls_targets.forEach(function(target) {
+        target.classList.remove("active");
+      });
+      s3_svg.forEach(function(svg) {
+        svg.style.opacity = 0;
+        // svg.pauseAnimations();
+      });
+      s3_controls_targets[0].classList.add("active");
+    }, false);
+  });
+  </script>
+</section>
+<section id="solution4">
+  <div class="slide">
+    <div class="row">
+      <div class="col50" style="padding-right: 5rem;">
+        <p class="headline"><b>scramble</b> fits unique niche relative to&nbsp;classic financing providers</p>
+      </div>
+      <div class="col50" style="margin-top: 0.5rem;padding-left: 4rem;padding-right: 8rem;">
+        <p class="lead">Available when business success is&nbsp;still highly uncertain. Convenient and informal process</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col100" style="padding-right: 9rem;">
+        <ul class="radio" style="margin-top: 4rem;">
+          <li class="active">VS early-stage equity investors
+            <ul>
+              <li class="scramble-notebook">Financing not capped at&nbsp;3-5x monthly revenue&nbsp;&mdash; available up&nbsp;to&nbsp;250x monthly revenue</li>
+              <li class="scramble-shield">Safe in&nbsp;case of&nbsp;business failure&nbsp;&mdash; no&nbsp;hidden charges or&nbsp;&laquo;unconventional&raquo; collection methods</li>
+              <li class="scramble-money">Earliest ﬁnancing available&nbsp;&mdash; only $100+ monthly recurring revenue</li>
+            </ul>
+          </li>
+          <li>VS alternative lenders
+            <ul>
+              <li class="scramble-coins">10x less expensive</li>
+              <li class="scramble-graph">Not limited to&nbsp;the &lsquo;next google/uber&rsquo; technology start-ups</li>
+              <li class="scramble-feather">Zero involvement in&nbsp;management</li>
+            </ul>
+          </li>
+          <li>VS Classic banks
+            <ul>
+              <li class="scramble-wallet">Not interested in&nbsp;your personal credit history or&nbsp;assets</li>
+              <li class="scramble-notebook">Business can be&nbsp;just three months old and unproﬁtable</li>
+              <li class="scramble-smile">Decisions made by&nbsp;peer founders, not bureaucrats</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+  let ul_radio_li = document.querySelectorAll("ul.radio li");
+  ul_radio_li.forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      ul_radio_li.forEach(function(li) {
+        li.classList.remove('active');
+      });
+      item.classList.add('active');
+    }, false);
+  });
+  </script>
+</section>
+<section id="features">
+  <div class="slide">
+    <div class="row">
+      <div class="col40">
+        <p class="headline" style="margin-bottom: 3rem;">Key financing features</p>
+      </div>
+    </div>
+    <ul class="row dot" style="padding-left: 4rem;padding-right: 7rem;">
+      <li class="col33">
+        <p class="headline">100&nbsp;000&nbsp;$</p>
+        <p> maximum amount per&nbsp;founder</p>
+      </li>
+      <li class="col33">
+        <p class="headline">60&nbsp;<small>months</small></p>
+        <p>to&nbsp;repay in&nbsp;equal monthly payments</p>
+      </li>
+      <li class="col33">
+        <p class="headline">3&nbsp;/ 6&nbsp;/ 12</p>
+        <p>&nbsp;disbursed monthly</p>
+      </li>
+      <li class="col33">
+        <p class="headline">5&nbsp;%</p>
+        <p> p.&nbsp;a. base interest, revenue sharing over 12&nbsp;months</p>
+      </li>
+      <li class="col33">
+        <p class="headline">Swap</p>
+        <p> pairs pay for&nbsp;me if&nbsp;my&nbsp;company fails</p>
+      </li>
+      <li class="col33">
+        <p class="headline">2&nbsp;<small>x</small></p>
+        <p> Maximum exposure if&nbsp;all swap founders fail: 2x&nbsp;of&nbsp;own loan</p>
+      </li>
+    </ul>
+  </div>
+</section>
+<section id="contact">
+  <div class="slide">
+    <div class="row">
+      <div class="col50">
+        <p class="headline">How to contact us?</p>
+      </div>
+       <div class="col33" style="margin: 0.7rem 3rem 0 3rem;">
+        <p class="lead"><b>scramble</b> is an invitation-only founder community</p>
+      </div>
+    </div>
+    <form id="contact_form" name="contact-form" accept-charset="utf-8" action="/send.php" method="post">
+      <input type="text" name="_gotcha" style="display:none" />
+      <div class="row" style="margin-top: 2.5rem;">
+        <div class="col50">
+          <p style="padding-right: 8rem;">If&nbsp;you want to&nbsp;learn more about <b>scramble</b> or&nbsp;request a&nbsp;membership, please share your Facebook and LinkedIn profiles with&nbsp;us. We&nbsp;will check in&nbsp;with our current founder&nbsp;members and get back to&nbsp;you!</p>
+          <div class="row" style="margin-top: 5rem; margin-right: 4rem;">
+            <div class="col50">
+              <label class="small">Facebook link</label>
+              <input name="fb-link" type="url" placeholder="Enter link">
+            </div>
+            <div class="col50">
+              <label class="small">LinkedIn link</label>
+              <input name="li-link" type="url" placeholder="Enter link">
+            </div>
+          </div>
+        </div>
+        <div class="col33"style="padding-left: 3rem; margin-top: 2.5rem;">
+          <button type="submit" class="btn-outline-circle">Send</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+var form = document.getElementById('contact_form');
+var button = form.querySelector('button[type=submit].btn-outline-circle');
+
+// Append the form status
+var formStatus = document.createElement('div');
+// formStatus.setAttribute('class', 'form-status alert');
+// form.appendChild(formStatus);
+
+form.onsubmit = function (e) {
+  // Stop the regular form submission
+  e.preventDefault();
+
+  button.disabled = true;
+  button.classList.add("sending");
+  button.innerHTML = "Sending...";
+  // Collect the form data while iterating over the inputs
+  var data = {};
+  for (var i = 0, ii = form.length; i < ii; ++i) {
+    var input = form[i];
+    if (input.name && input.value) {
+      data[input.name] = input.value;
+    }
+  }
+
+  if (Object.entries(data).length) {
+    // Construct an HTTP request
+    var xhr = new XMLHttpRequest();
+    xhr.open(form.method, form.action, true);
+    xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    // Send the collected data as JSON
+    xhr.send(JSON.stringify(data));
+
+    // Callback function
+    xhr.onloadend = function (response) {
+      if (response.target.status === 0) {
+
+        // Failed XmlHttpRequest should be considered an undefined error.
+        // formStatus.className += ' alert-danger';
+        button.classList.add("error");
+
+        // formStatus.innerHTML = form.dataset.formError;
+
+      } else if (response.target.status === 400) {
+
+        // Bad Request
+        // formStatus.className += ' alert-danger';
+        button.classList.add("error");
+        // formStatus.innerHTML = JSON.parse(responseText).error;
+
+      } else if (response.target.status === 200) {
+
+        // Success
+        formStatus.className += ' alert-success';
+        // formStatus.innerHTML = form.dataset.formSuccess;
+        button.innerHTML = "Done";
+      }
+    };
+  } else {
+    button.disabled = false;
+    button.classList.remove("sending");
+    button.innerHTML = "Send";
+    console.log("Enter one link, at least...");
+  }
+};
+</script>
+
+
+    </main><nav class="header" id="side">
+  <div>
+    <a href="#header" id="up" data-caption="prev" class="btn-outline-circle hover-caption"><i class="scramble scramble-arrow-up"></i></a>
+    <a href="#about" id="down" data-caption="next" class="btn-outline-circle hover-caption"><i class="scramble scramble-arrow-down"></i></a>
+  </div>
+</nav>
+<footer>
+  <div class="copyright">
+    <div class="logo"><i class="scramble scramble-logo"></i></div>
+    <div class="muted">&copy; 2020 scramble. All rights reserved</div>
+  </div>
+  <div class="address muted">950 Page Mill Road, Palo Alto, CA 94304, USA</div>
+  <ul class="social">
+    <li><a href="https://www.facebook.com/ScrambleUpCom/" target="_blank" rel="noopener"><i class="scramble scramble-facebook"></i></a></li>
+    <li><a href="https://www.linkedin.com/company/scrambleup" target="_blank" rel="noopener"><i class="scramble scramble-linkedin"></i></a></li>
+  </ul>
+  <div class="credits">
+    <p>Design by Dima Opalev</p>
+    <p>Coding by <a href="https://yankie.ru/" target="_blank" rel="noopener">Yankie.ru</a></p>
+  </div>
+</footer>
+<!--[if lt IE 8]>
+<script src="assets/ie7/ie7.js"></script>
+<![endif]-->
+<script src="assets/main.js"></script><div id="loader">
+  <div>
+    <i class="scramble scramble-logo"></i>
+    <i class="scramble scramble-logo"></i>
+  </div>
+  <script src="/assets/loader.js"></script>
+</div>
+</body>
+</html>
