@@ -79,10 +79,10 @@ function init() {
   let lo = document.querySelector('#login-o');
   let lc = document.querySelector('#login-c');
 
-  lo.addEventListener('click', function(e){
-    e.preventDefault();
-    login.classList.remove('hidden');
-  });
+  // lo.addEventListener('click', function(e){
+  //   e.preventDefault();
+  //   login.classList.remove('hidden');
+  // });
   lc.addEventListener('click', function(e){
     e.preventDefault();
     login.classList.add('hidden');
