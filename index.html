@@ -1015,12 +1015,36 @@ form.onsubmit = function (e) {
   if (Object.entries(data).length) {
     // Construct an HTTP request
     var xhr = new XMLHttpRequest();
-    xhr.open(form.method, form.action, true);
+    xhr.open("POST", "https://api.sendgrid.com/v3/mail/send", true);
+    // xhr.open(form.method, form.action, true);
     xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    xhr.setRequestHeader('Authorization', `Bearer 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`);
 
     // Send the collected data as JSON
-    xhr.send(JSON.stringify(data));
+    var message = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": "victor@61hub.com"
+            }
+          ],
+          "subject": "New lead from scrambleup.com"
+        }
+      ],
+      "from": {
+        "email": "no-reply@scrambleup.com"
+      },
+      "content": [
+        {
+          "type": "text/plain",
+          "value": `New contact form submittion on scrambleup.com \n ${JSON.stringify(data)}`
+        }
+      ]
+    }
+
+    xhr.send(JSON.stringify(message));
 
     // Callback function
     xhr.onloadend = function (response) {
