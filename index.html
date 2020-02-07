@@ -20,7 +20,14 @@
   <![endif]-->
 
 </head>
-<body class="loading"><header id="header" class="scrolled-in">
+<body class="loading"><div id="loader">
+  <div>
+    <i class="scramble scramble-logo"></i>
+    <i id="progress" class="scramble scramble-logo"></i>
+  </div>
+  <!-- <script src="/assets/loader.js" type="text/javascript"></script> -->
+</div>
+<header id="header" class="scrolled-in">
   <nav id="main">
     <div class="logo">
       <a href="#header"><i class="scramble scramble-logo"></i></a>
@@ -31,15 +38,15 @@
       <div>
         <div class="dots">
         
-          <a href="#about"><i class="scramble scramble-dot"></i></a>
+          <span><i class="scramble scramble-dot"></i></span>
         
-          <a href="#problem"><i class="scramble scramble-dot"></i></a>
+          <span><i class="scramble scramble-dot"></i></span>
         
-          <a href="#solution"><i class="scramble scramble-dot"></i></a>
+          <span><i class="scramble scramble-dot"></i></span>
         
-          <a href="#features"><i class="scramble scramble-dot"></i></a>
+          <span><i class="scramble scramble-dot"></i></span>
         
-          <a href="#contact"><i class="scramble scramble-dot"></i></a>
+          <span><i class="scramble scramble-dot"></i></span>
         
         </div>
         <div class="links">
@@ -57,8 +64,7 @@
         </div>
       </div>
     </div>
-<!--    <a id="login-o" class="dot" href="#">Login</a>-->
-    <a class="dot" href="https://app.scrambleup.com/login/">Login</a>
+    <a id="login-o" class="dot" href="#">Login</a>
   </nav>
 </header><div id="login" class="hidden">
   <div class="login-wrapper">
@@ -70,12 +76,12 @@
     </div>
     <div class="slide">
       <div class="row" style="justify-content: center;">
-        <div class="col20">
+        <div class="col-20 mcol-60">
           <form>
             <label class="small">Login</label>
-            <input type="email" placeholder="Enter email" name="email">
+            <input type="username" placeholder="Enter username">
             <label class="small">Password</label>
-            <input type="password" placeholder="Enter password" name="password">
+            <input type="password" placeholder="Enter password">
             <br>
             <button type="submit" class="btn-outline-circle">Login</button>
           </form>
@@ -92,185 +98,6 @@
 
       <section id="header">
   <div class="slide"></div>
-  <script type="text/javascript" src="assets/effects.js"></script>
-  <script type="module">
-    const imgSize = [800, 800];
-
-    const vertex = `
-					attribute vec2 uv;
-					attribute vec2 position;
-					varying vec2 vUv;
-					void main() {
-							vUv = uv;
-							gl_Position = vec4(position, 0, 1);
-					}
-			`;
-    const fragment = `
-					precision highp float;
-					precision highp int;
-					uniform sampler2D tWater;
-					uniform sampler2D tFlow;
-					uniform float uTime;
-					varying vec2 vUv;
-					uniform vec4 res;
-
-					void main() {
-
-							// R and G values are velocity in the x and y direction
-							// B value is the velocity length
-							vec3 flow = texture2D(tFlow, vUv).rgb;
-
-							vec2 uv = .5 * gl_FragCoord.xy / res.xy ;
-							vec2 myUV = (uv - vec2(0.5))*res.zw + vec2(0.5);
-							myUV -= flow.xy * (0.15 * 0.7);
-
-							vec3 tex = texture2D(tWater, myUV).rgb;
-
-							gl_FragColor = vec4(tex.r, tex.g, tex.b, 1.0);
-					}
-			`;
-    {
-      const renderer = new ogl.Renderer({ dpr: 2 });
-      const gl = renderer.gl;
-      document.querySelector('#bg-animations').appendChild(gl.canvas);
-
-      // Variable inputs to control flowmap
-      let aspect = 1;
-      const mouse = new ogl.Vec2(-1);
-      const velocity = new ogl.Vec2();
-      function resize() {
-        let a1, a2;
-        var imageAspect = imgSize[1] / imgSize[0];
-        if (window.innerHeight / window.innerWidth > imageAspect) {
-          a1 = 1;
-          a2 = window.innerHeight / window.innerWidth / imageAspect;
-        } else {
-          a1 = (window.innerWidth / window.innerHeight) * imageAspect;
-          a2 = 1;
-        }
-        mesh.program.uniforms.res.value = new ogl.Vec4(
-          window.innerWidth,
-          window.innerHeight,
-          a1,
-          a2
-        );
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        aspect = window.innerWidth / window.innerHeight;
-      }
-      const flowmap = new ogl.Flowmap(gl);
-      // Triangle that includes -1 to 1 range for 'position', and 0 to 1 range for 'uv'.
-      const geometry = new ogl.Geometry(gl, {
-        position: {
-          size: 2,
-          data: new Float32Array([-1, -1, 3, -1, -1, 3])
-        },
-        uv: { size: 2, data: new Float32Array([0, 0, 2, 0, 0, 2]) }
-      });
-      const texture = new ogl.Texture(gl, {
-        minFilter: gl.LINEAR,
-        magFilter: gl.LINEAR
-      });
-      const img = new Image();
-      img.onload = () => (texture.image = img);
-      img.crossOrigin = "Anonymous";
-      img.src = "/assets/img/dot.png";
-
-      let a1, a2;
-      var imageAspect = imgSize[1] / imgSize[0];
-      if (window.innerHeight / window.innerWidth < imageAspect) {
-        a1 = 1;
-        a2 = window.innerHeight / window.innerWidth / imageAspect;
-      } else {
-        a1 = (window.innerWidth / window.innerHeight) * imageAspect;
-        a2 = 1;
-      }
-
-      const program = new ogl.Program(gl, {
-        vertex,
-        fragment,
-        uniforms: {
-          uTime: { value: 0 },
-          tWater: { value: texture },
-          res: {
-            value: new ogl.Vec4(window.innerWidth, window.innerHeight, a1, a2)
-          },
-          img: { value: new ogl.Vec2(imgSize[0], imgSize[1]) },
-          // Note that the uniform is applied without using an object and value property
-          // This is because the class alternates this texture between two render targets
-          // and updates the value property after each render.
-          tFlow: flowmap.uniform
-        }
-      });
-      const mesh = new ogl.Mesh(gl, { geometry, program });
-
-      window.addEventListener("resize", resize, false);
-      resize();
-
-      // Create handlers to get mouse position and velocity
-      const isTouchCapable = "ontouchstart" in window;
-      if (isTouchCapable) {
-        window.addEventListener("touchstart", updateMouse, false);
-        window.addEventListener("touchmove", updateMouse, { passive: false });
-      } else {
-        window.addEventListener("mousemove", updateMouse, false);
-      }
-      let lastTime;
-      const lastMouse = new ogl.Vec2();
-      function updateMouse(e) {
-        //e.preventDefault();
-        if (e.changedTouches && e.changedTouches.length) {
-          e.x = e.changedTouches[0].pageX;
-          e.y = e.changedTouches[0].pageY;
-        }
-        if (e.x === undefined) {
-          e.x = e.pageX;
-          e.y = e.pageY;
-        }
-        // Get mouse value in 0 to 1 range, with y flipped
-        mouse.set(e.x / gl.renderer.width, 1.0 - e.y / gl.renderer.height);
-        // Calculate velocity
-        if (!lastTime) {
-          // First frame
-          lastTime = performance.now();
-          lastMouse.set(e.x, e.y);
-        }
-
-        const deltaX = e.x - lastMouse.x;
-        const deltaY = e.y - lastMouse.y;
-
-        lastMouse.set(e.x, e.y);
-
-        let time = performance.now();
-
-        // Avoid dividing by 0
-        let delta = Math.max(10.4, time - lastTime);
-        lastTime = time;
-        velocity.x = deltaX / delta;
-        velocity.y = deltaY / delta;
-        // Flag update to prevent hanging velocity values when not moving
-        velocity.needsUpdate = true;
-      }
-      requestAnimationFrame(update);
-      function update(t) {
-        requestAnimationFrame(update);
-        // Reset velocity when mouse not moving
-        if (!velocity.needsUpdate) {
-          mouse.set(-1);
-          velocity.set(0);
-        }
-        velocity.needsUpdate = false;
-        // Update flowmap inputs
-        flowmap.aspect = aspect;
-        flowmap.mouse.copy(mouse);
-        // Ease velocity input, slower when fading out
-        flowmap.velocity.lerp(velocity, velocity.len ? 0.15 : 0.1);
-        flowmap.update();
-        program.uniforms.uTime.value = t * 0.01;
-        renderer.render({ scene: mesh });
-      }
-    }
-  </script>
 </section>
 <section id="about">
   <div class="slide">
@@ -280,56 +107,57 @@
 <section id="problem">
   <div class="slide">
     <div class="row">
-      <div class="col40">
+      <div class="col-40 mcol-90">
         <p class="headline">For a&nbsp;growth founder, fundraising is&nbsp;the core business process</p>
-        <p>Most early stage start-ups are &laquo;default dead&raquo;:<br>they will cease to&nbsp;exist unless founders raise capital.</p>
+        <p>Most early stage start-ups are &laquo;default dead&raquo;: <br class="md-none">they will cease to&nbsp;exist unless founders raise capital.</p>
       </div>
-      <div class="col60">
+      <div class="col-60 md-none">
         <div class="row">
-          <div class="col25">
+          <div class="col-25">
           </div>
-          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+          <div class="col-25" >
             <div class="dot"></div>
           </div>
-          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+          <div class="col-25" >
             <div class="dot"></div>
           </div>
-          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+          <div class="col-25" >
             <div class="dot"></div>
           </div>
-          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+          <div class="col-25" >
             <div class="dot"></div>
           </div>
-          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+          <div class="col-25" >
             <div class="dot"></div>
           </div>
-          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+          <div class="col-25" >
             <div class="dot"></div>
           </div>
-          <div class="col25" style="margin-bottom: 2rem; position: relative;">
+          <div class="col-25" >
             <div class="dot"></div>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col40">
-        <div class="row>">
-          <div class="col40" style="position: relative;">
+
+      <div class="col-40 mcol-90">
+        <div class="row">
+          <div class="col-40 mcol-50">
+            <div class="dot"></div>
+          </div>
+          <div class="d-none mcol-50">
             <div class="dot"></div>
           </div>
         </div>
       </div>
-      <div class="col60">
+      <div class="col-60 mcol-100">
         <div class="row">
-          <div class="col50" style="padding:0;">
-            <div style="display: flex; align-items: flex-start; margin-top: 1rem; margin-bottom: 1rem;">
-              <div style="font-size: 5rem; font-weight: 400; line-height: 0.8;"><p>15-50</p></div>
-              <div style="font-size: 2rem; font-weight: 400;line-height: 1;"><p>%</p></div>
-            </div>
-            <p style="margin-left: .75rem;">your time dealing with fundraising<br> one way or&nbsp;another </p>
+          <div id="fundrising-time" class="col-50 mcol-90">
+            <p><span>15-50</span><span>%</span></p>
+            <p>your time dealing with fundraising<br> one way or&nbsp;another</p>
           </div>
-          <div class="col25" style="position: relative;">
+          <div class="col-25 md-none" style="position: relative;">
             <div class="dot"></div>
           </div>
         </div>
@@ -371,15 +199,15 @@
 <section id="problem1">
   <div class="slide">
     <div class="row">
-      <div class="col50">
+      <div class="col-50 mcol-90">
         <p class="headline">Supplementary founder financing dramatically changes fundraising outcomes</p>
         <p style="padding-right: 9rem;">Fundraising is&nbsp;time-consuming and erratic. Convenient access to&nbsp;supplementary financing helps founder stay in&nbsp;control. When you&rsquo;re not scrambling to&nbsp;fundraise, you have more capacity to&nbsp;work on&nbsp;the business.
         </p>
         <p class="spoiler" style="padding-right: 9rem;">You understand customers better, design products better, hire people better, and yes, can afford to&nbsp;accept only good offers from investors</p>
       </div>
-      <div class="col50">
+      <div class="col-50 mcol-90">
         <div class="row">
-          <div class="col66" style="position: relative; margin-left: 5rem;">
+          <div class="col-66" style="position: relative; margin-left: 5rem;">
             <div class="dot coin"></div>
             <!-- <div class="dot"></div> -->
             <!-- <span class="tooltip">Find investor,<br>if you have time</span> -->
@@ -401,23 +229,23 @@
 <section id="solution">
   <div class="slide">
     <div class="row">
-      <div class="col55">
+      <div class="col-55 mcol-90">
         <p class="headline"><b>scramble</b> is&nbsp;the founder-driven platform for supplementary financing</p>
       </div>
-      <div class="col33" style="margin: 0.7rem 0 0 -0.6rem;">
+      <div class="col-33 mcol-90" style="margin: 0.7rem 0 0 -0.6rem;">
         <p class="lead">We&nbsp;provide supplementary financing to&nbsp;founders<br> in&nbsp;a&nbsp;three-step process</p>
       </div>
     </div>
     <div class="row" >
-      <div class="col90" style="margin: auto; padding-top: 1rem;">
+      <div class="col-90 mcol-90" style="margin: auto; padding-top: 1rem;">
         <ol class="dot">
-          <li class="col33">
+          <li class="col-33 mcol-100">
             Platform jointly with member founders forms and develops high-trust founder community
           </li>
-          <li class="col33">
+          <li class="col-33 mcol-100" style="padding-bottom: 8em !important;">
             Platform pre-approves credit limit to&nbsp;each founder based on&nbsp;employability in&nbsp;case current business fails
           </li>
-          <li class="col33">
+          <li class="col-33 mcol-100">
             Founders decide who is&nbsp;actually funded using mutual repayment guarantees
           </li>
         </ol>
@@ -428,14 +256,14 @@
 <section id="solution1">
   <div class="slide">
     <div class="row">
-      <div class="col40">
+      <div class="col-40 mcol-90">
         <p class="headline">High-trust founder community</p>
       </div>
-      <div class="col40" style="margin: 0.7rem 0 0 0;">
+      <div class="col-40 mcol-90" style="margin: 0.7rem 0 0 0;">
         <p>Trust among founder members is&nbsp;at&nbsp;the heart of&nbsp;the value that <b>scramble</b> platform provides. We&nbsp;invite new member founders based on&nbsp;their proven integrity, competence, and willingness to&nbsp;help other founders succeed.</p>
       </div>
     </div>
-    <div id="s1_faces" class="row" style="margin-top: 5rem;"><div class="col20">
+    <div id="s1_faces" class="row" style="margin-top: 5rem;"><div class="col-20 mcol-50">
         <div class="btn-face">
           <div class="bg face-1" data-face="url('/assets/img/face1.png')"></div>
           <video muted playsinline>
@@ -444,7 +272,7 @@
           <!-- <span class="tooltip hide">Hi, I'm James Franco <i class="">1</i></span> -->
           <div class="add"></div>
         </div>
-      </div><div class="col20">
+      </div><div class="col-20 mcol-50">
         <div class="btn-face">
           <div class="bg face-6" data-face="url('/assets/img/face6.png')"></div>
           <video muted playsinline>
@@ -453,7 +281,7 @@
           <!-- <span class="tooltip hide">Hi, I'm <br>Joshua Doe <br><i class="">6</i></span> -->
           <div class="add"></div>
         </div>
-      </div><div class="col20">
+      </div><div class="col-20 mcol-50 md-none">
         <div class="btn-face">
           <div class="bg face-3" data-face="url('/assets/img/face3.png')"></div>
           <video muted playsinline>
@@ -462,7 +290,7 @@
           <!-- <span class="tooltip hide">Hi, I'm Don Franco <i class="">3</i></span> -->
           <div class="add"></div>
         </div>
-      </div><div class="col20">
+      </div><div class="col-20 mcol-50 md-none">
         <div class="btn-face">
           <div class="bg face-4" data-face="url('/assets/img/face4.png')"></div>
           <video muted playsinline>
@@ -471,7 +299,7 @@
           <!-- <span class="tooltip hide">Hi, I'm Felicia Franco <i class="">4</i></span> -->
           <div class="add"></div>
         </div>
-      </div><div class="col20">
+      </div><div class="col-20 mcol-50 md-none">
         <div class="btn-face">
           <div class="bg face-5" data-face="url('/assets/img/face5.png')"></div>
           <video muted playsinline>
@@ -511,10 +339,10 @@
 <section id="solution2">
   <div class="slide">
     <div class="row">
-      <div class="col40" style="padding-top: 3rem;">
+      <div class="col-40 mcol-90" style="padding-top: 3rem;">
         <p class="headline">Mutual repayment guarantee is&nbsp;your calculated bet on&nbsp;the fountders you personally trust</p>
       </div>
-      <div class="col60">
+      <div class="col-60 mcol-90" style="margin-bottom: 3em;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 50">
           <defs>
             <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -536,7 +364,7 @@
           </g>
         </svg>
         <div class="row">
-          <div class="col40">
+          <div class="col-40">
             <div class="btn-face">
               <div class="bg face-1"></div>
               <video muted playsinline>
@@ -544,7 +372,7 @@
               </video>
             </div>
           </div>
-          <div class="col40" style="margin-left: auto">
+          <div class="col-40" style="margin-left: auto">
             <div class="btn-face">
               <div class="bg face-6"></div>
               <video muted playsinline>
@@ -574,16 +402,16 @@
       </div>
     </div>
     <div class="row">
-      <div class="col50" style="display: flex; margin-top: -4rem;">
-        <ul class="sm-dot">
-          <li class="col50">Founders agree to&nbsp;repay for each other if&nbsp;eihter company fails and the other one succeeds</li>
-          <li class="col50">Swaps can be&nbsp;done monthly across all founders on&nbsp;the platform</li>
-          <li class="col50">If&nbsp;both companies fail, unpaid amount is&nbsp;picked by&nbsp;founders as&nbsp;individuals</li>
-          <li class="col50">No&nbsp;more than&nbsp;25% of&nbsp;the loan amount per one swap partner</li>
+      <div class="col-50 mcol-90" style="display: flex; margin-top: -4rem;">
+        <ul class="sm-dot hidden">
+          <li class="col-50 mcol-100">Founders agree to&nbsp;repay for each other if&nbsp;eihter company fails and the other one succeeds</li>
+          <li class="col-50 mcol-100">Swaps can be&nbsp;done monthly across all founders on&nbsp;the platform</li>
+          <li class="col-50 mcol-100">If&nbsp;both companies fail, unpaid amount is&nbsp;picked by&nbsp;founders as&nbsp;individuals</li>
+          <li class="col-50 mcol-100">No&nbsp;more than&nbsp;25% of&nbsp;the loan amount per one swap partner</li>
         </ul>
-        <a class="btn-add"><i class="scramble scramble-plus"></i></a>
+        <a class="btn-add"></a>
       </div>
-      <div class="col10">
+      <div class="col-10">
       </div>
     </div>
   </div>
@@ -605,6 +433,7 @@
       });
       this.classList.toggle('visible');
       s2_ul_sm_dot.classList.toggle('visible');
+      s2_ul_sm_dot.classList.toggle('hidden');
 
     });
 
@@ -616,7 +445,7 @@
 <section id="solution3">
   <div class="slide">
     <div class="row">
-      <div class="col50" style="position: relative;">
+      <div class="col-50 mcol-90" style="position: relative; min-height: 15em;">
         <div class="s3_targets active">
           <p class="headline">Your financing works well in&nbsp;case of&nbsp;both company success and failure</p>
           <p></p>
@@ -631,25 +460,25 @@
           <!-- <p <p>at&nbsp;least part (if&nbsp;not all) of&nbsp;my&nbsp;debt will be&nbsp;repaid <br>by&nbsp;successful swap pairs</p> -->
           <p>Best case, all of&nbsp;my&nbsp;debt is&nbsp;repaid by&nbsp;my&nbsp;swap pairs. While my&nbsp;own business may fail, I&nbsp;will end up&nbsp;with little to&nbsp;no&nbsp;outstanding debt</p>
         </div>
-        <div style="padding: 7rem;"></div>
+        <!-- <div style="padding: 7rem;"></div> -->
       </div>
-      <div class="col50">
+      <div class="col-50 mcol-90">
         <div class="row">
-          <div class="col33">
+          <div class="col-33 md-none">
           </div>
-          <div class="col33">
+          <div class="col-33 mcol-50">
             <a class="btn-outline-circle" data-target="1">Success</a>
           </div>
-          <div class="col33">
+          <div class="col-33 mcol-50">
             <a class="btn-outline-circle" data-target="2">Failure</a>
           </div>
         </div>
       </div>
     </div>
-    <div class="row faces">
-      <div class="col30" style="position: relative;">
+    <div class="row faces md-none">
+      <div class="col-30" style="position: relative;">
         <div class="row">
-          <div class="col40"style="margin-top: 5rem;">
+          <div class="col-40"style="margin-top: 5rem;">
             <div id="s3-arrow-6" class="left" style="width: 14rem; height: 2rem;">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115 16">
                 <defs>
@@ -672,7 +501,7 @@
               </video>
             </div>
           </div>
-          <div class="col40">
+          <div class="col-40">
             <div id="s3-arrow-7" class="left"  style="width: 6rem;">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 20">
                 <defs>
@@ -695,7 +524,7 @@
               </video>
             </div>
           </div>
-          <div class="col40" style="margin: auto;">
+          <div class="col-40" style="margin: auto;">
             <div id="s3-arrow-3" class="left"  style="margin-top: 0; width: 9rem;">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 25">
                 <defs>
@@ -720,7 +549,7 @@
           </div>
         </div>
       </div>
-      <div class="col25">
+      <div class="col-25">
         <div class="btn-face">
           <div class="bg face-1"></div>
           <video muted playsinline>
@@ -728,9 +557,9 @@
           </video>
         </div>
       </div>
-      <div class="col30" style="position: relative; margin-left: 3rem;">
+      <div class="col-30" style="position: relative; margin-left: 3rem;">
         <div class="row faces">
-          <div class="col40">
+          <div class="col-40">
             <div id="s3-arrow-2" class="right" style="width: 5rem; margin-left: -5rem; height:2rem;">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 16">
                 <defs>
@@ -753,7 +582,7 @@
               </video>
             </div>
           </div>
-          <div class="col40" style="margin-top: 4rem; margin-left: auto;">
+          <div class="col-40" style="margin-top: 4rem; margin-left: auto;">
             <div id="s3-arrow-5" class="right" style="width: 18rem; margin-left: -18rem;">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 22">
                 <defs>
@@ -776,7 +605,7 @@
               </video>
             </div>
           </div>
-          <div class="col40"style="margin-left: 4rem;">
+          <div class="col-40"style="margin-left: 4rem;">
             <div id="s3-arrow-4" class="right" style="width: 10rem; margin-left: -10rem; margin-top: 1rem;">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 30">
                 <defs>
@@ -811,6 +640,26 @@
   let s3_svg_p = document.querySelectorAll("#solution3 svg path");
   let s3_v_1 = s3_faces.querySelectorAll(".btn-face .bg.face-1+video");
   let s3_v_2 = s3_faces.querySelectorAll(".btn-face .bg:not(.face-1)+video");
+
+  // function s3_target_height_onresize() {
+  //   let s3_target_parent, s3_target_height = 0;
+  //   s3_controls_targets.forEach(function(item) {
+  //     console.log("Resize detected in s3");
+  //     s3_target_parent = item.parentElement;
+  //     s3_target_height = Math.max(s3_target_height, item.clientHeight);
+  //   });
+  //   s3_target_parent.style.minHeight = s3_target_height+"px";
+  //   console.log(s3_target_parent, s3_target_height);
+  // }
+  // window.addEventListener("resize", function() {
+  //     setTimeout(function() {
+  //       s3_target_height_onresize();
+  //     }, 566);
+  //   },
+  // false);
+
+  // s3_target_height_onresize();
+
   s3_svg.forEach(function(svg) {
     svg.style.opacity = 0;
     svg.pauseAnimations();
@@ -871,15 +720,15 @@
 <section id="solution4">
   <div class="slide">
     <div class="row">
-      <div class="col50" style="padding-right: 5rem;">
+      <div class="col-50 mcol-90" style="padding-right: 5rem;">
         <p class="headline"><b>scramble</b> fits unique niche relative to&nbsp;classic financing providers</p>
       </div>
-      <div class="col50" style="margin-top: 0.5rem;padding-left: 4rem;padding-right: 8rem;">
+      <div class="col-50 mcol-90" style="margin-top: 0.5rem;padding-left: 4rem;padding-right: 8rem;">
         <p class="lead">Available when business success is&nbsp;still highly uncertain. Convenient and informal process</p>
       </div>
     </div>
     <div class="row">
-      <div class="col100" style="padding-right: 9rem;">
+      <div class="col-100 mcol-100" style="padding-right: 9rem;">
         <ul class="radio" style="margin-top: 4rem;">
           <li class="active">VS early-stage equity investors
             <ul>
@@ -921,32 +770,32 @@
 <section id="features">
   <div class="slide">
     <div class="row">
-      <div class="col40">
+      <div class="col-40 mcol-90">
         <p class="headline" style="margin-bottom: 3rem;">Key financing features</p>
       </div>
     </div>
-    <ul class="row dot" style="padding-left: 4rem;padding-right: 7rem;">
-      <li class="col33">
+    <ul class="row dot">
+      <li class="col-33 mcol-50">
         <p class="headline">100&nbsp;000&nbsp;$</p>
         <p> maximum amount per&nbsp;founder</p>
       </li>
-      <li class="col33">
+      <li class="col-33 mcol-50">
         <p class="headline">60&nbsp;<small>months</small></p>
         <p>to&nbsp;repay in&nbsp;equal monthly payments</p>
       </li>
-      <li class="col33">
+      <li class="col-33 mcol-50">
         <p class="headline">3&nbsp;/ 6&nbsp;/ 12</p>
         <p>&nbsp;disbursed monthly</p>
       </li>
-      <li class="col33">
+      <li class="col-33 mcol-50">
         <p class="headline">5&nbsp;%</p>
         <p> p.&nbsp;a. base interest, revenue sharing over 12&nbsp;months</p>
       </li>
-      <li class="col33">
+      <li class="col-33 mcol-50">
         <p class="headline">Swap</p>
         <p> pairs pay for&nbsp;me if&nbsp;my&nbsp;company fails</p>
       </li>
-      <li class="col33">
+      <li class="col-33 mcol-50">
         <p class="headline">2&nbsp;<small>x</small></p>
         <p> Maximum exposure if&nbsp;all swap founders fail: 2x&nbsp;of&nbsp;own loan</p>
       </li>
@@ -956,30 +805,30 @@
 <section id="contact">
   <div class="slide">
     <div class="row">
-      <div class="col50">
+      <div class="col-50 mcol-100">
         <p class="headline">How to contact us?</p>
       </div>
-       <div class="col33" style="margin: 0.7rem 3rem 0 3rem;">
+       <div class="col-33 mcol-100">
         <p class="lead"><b>scramble</b> is an invitation-only founder community</p>
       </div>
     </div>
-    <form id="contact_form" name="contact-form" accept-charset="utf-8" action="/api/email/" method="post">
+    <form id="contact_form" name="contact-form" accept-charset="utf-8" action="/send.php" method="post">
       <input type="text" name="_gotcha" style="display:none" />
-      <div class="row" style="margin-top: 2.5rem;">
-        <div class="col50">
+      <div class="row" style="margin-top: 1.5em;">
+        <div class="col-50 mcol-100">
           <p style="padding-right: 8rem;">If&nbsp;you want to&nbsp;learn more about <b>scramble</b> or&nbsp;request a&nbsp;membership, please share your Facebook and LinkedIn profiles with&nbsp;us. We&nbsp;will check in&nbsp;with our current founder&nbsp;members and get back to&nbsp;you!</p>
-          <div class="row" style="margin-top: 5rem; margin-right: 4rem;">
-            <div class="col50">
+          <div class="row" style="margin-top: 5em; margin-right: 4rem;">
+            <div class="col-50 mcol-100">
               <label class="small">Facebook link</label>
               <input name="fb-link" type="url" placeholder="Enter link">
             </div>
-            <div class="col50">
+            <div class="col-50 mcol-100">
               <label class="small">LinkedIn link</label>
               <input name="li-link" type="url" placeholder="Enter link">
             </div>
           </div>
         </div>
-        <div class="col33"style="padding-left: 3rem; margin-top: 2.5rem;">
+        <div class="col-33 mcol-90"style="padding-left: 3rem; margin-top: 2.5em;">
           <button type="submit" class="btn-outline-circle">Send</button>
         </div>
       </div>
@@ -1019,6 +868,7 @@ form.onsubmit = function (e) {
     xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
+    // Send the collected data as JSON
     xhr.send(JSON.stringify(data));
 
     // Callback function
@@ -1063,10 +913,8 @@ form.onsubmit = function (e) {
   </div>
 </nav>
 <footer>
-  <div class="copyright">
-    <div class="logo"><i class="scramble scramble-logo"></i></div>
-    <div class="muted">&copy; 2020 scramble. All rights reserved</div>
-  </div>
+  <div class="logo"><i class="scramble scramble-logo"></i></div>
+  <div class="copyright muted">&copy; 2020 scramble. All rights reserved</div>
   <div class="address muted">950 Page Mill Road, Palo Alto, CA 94304, USA</div>
   <ul class="social">
     <li><a href="https://www.facebook.com/ScrambleUpCom/" target="_blank" rel="noopener"><i class="scramble scramble-facebook"></i></a></li>
@@ -1080,12 +928,9 @@ form.onsubmit = function (e) {
 <!--[if lt IE 8]>
 <script src="assets/ie7/ie7.js"></script>
 <![endif]-->
-<script src="assets/main.js"></script><div id="loader">
-  <div>
-    <i class="scramble scramble-logo"></i>
-    <i class="scramble scramble-logo"></i>
-  </div>
-  <script src="/assets/loader.js"></script>
-</div>
-</body>
+<script src="/assets/effects.js" type="text/javascript"></script>
+<script src="/assets/egg.js" type="text/javascript"></script>
+<script src="/assets/main.js" type="text/javascript"></script><!-- <div style="display: none; display: block;position: absolute; left: 0; top: 0; right:0; z-index: -9999; opacity: 0.6;"><img style="width: 100%; height: auto;" width="720" height="auto" src="assets/img/bg_mobile.png"></div> -->
+
+  </body>
 </html>

@@ -72,17 +72,17 @@ function init() {
   let header = document.querySelector('header');
   let hh = header.offsetTop + header.offsetHeight;
   // let slide0 = document.querySelector('#header');
-  let dots = document.querySelectorAll('#menu .dots a');
+  let dots = document.querySelectorAll('#menu .dots span');
   let bga = document.querySelector('#bg-animations');
   
   let login = document.querySelector('#login');
   let lo = document.querySelector('#login-o');
   let lc = document.querySelector('#login-c');
 
-  // lo.addEventListener('click', function(e){
-  //   e.preventDefault();
-  //   login.classList.remove('hidden');
-  // });
+  lo.addEventListener('click', function(e){
+    e.preventDefault();
+    login.classList.remove('hidden');
+  });
   lc.addEventListener('click', function(e){
     e.preventDefault();
     login.classList.add('hidden');
@@ -91,8 +91,10 @@ function init() {
     // Loop over our selectors
     let currentScroll = hh - 1 + (document.documentElement.scrollTop || document.body.scrollTop); // Get Current Scroll Value
     // let bodyHeight = document.body.clientHeight;
+    let windowHeight = window.innerHeight;
+    // console.log(windowHeight);
 
-      // if (currentScroll > slide0.offsetHeight) { header.classList.remove('scrolled-in');}
+    // if (currentScroll > slide0.offsetHeight) { header.classList.remove('scrolled-in');}
       // if (currentScroll < slide0.offsetHeight) { header.classList.add('scrolled-in');}
     let prev,next;
     animationSelectors.forEach(selector => {
@@ -103,13 +105,13 @@ function init() {
       // let count=0;
       document.querySelectorAll(selector).forEach(element => {
         const elementHeight = element.offsetHeight;
-        const elementTop = element.offsetTop - elementHeight/4;
-        const elementBottom = elementTop + elementHeight;
+        const elementTop = element.offsetTop - windowHeight/3;
+        const elementBottom = element.offsetTop + elementHeight - windowHeight/3;
         if (elementTop > currentScroll) {
           element.classList.remove('scrolled-in');
           if(!next) {next = arrow_down.href = '#'+element.id;}
         }
-        else if (elementTop < currentScroll && currentScroll < elementBottom) {
+        else if (elementTop < currentScroll && currentScroll < elementBottom ) {
           bga.className = element.id;
           nav_side.className = element.id;
           header.className = element.id;
@@ -156,3 +158,18 @@ function init() {
 };
 
 document.addEventListener('DOMContentLoaded', init);
+
+window.addEventListener('load', function () {
+  let loader = document.querySelector('#loader');
+  let progressBar = loader.querySelector('#progress');
+  
+  progressBar.style.maxWidth = "100%";
+  setTimeout(function () {
+    return document.body.classList.remove('loading');
+  }, 450);
+  // console.log('All done!');
+  setTimeout(function () {
+    loader.style.backgroundColor = "transparent";
+    loader.style.zIndex = -10000;
+  }, 50);
+}, false);

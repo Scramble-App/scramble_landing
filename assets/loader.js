@@ -693,7 +693,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   }();
 
   let loader = document.querySelector('#loader');
-  let progressBar = loader.querySelector('i+i');
+  let progressBar = loader.querySelector('#progress');
   let pageLoader = new Loader({
     playthrough: true,
     backgrounds: true,
@@ -716,6 +716,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       return console.log(error);
     }).then(function () {
       // loader.innerHTML = 'done!';
+      progressBar.style.maxWidth = "100%";
       setTimeout(function () {
         return document.body.classList.remove('loading');
       }, 450);
