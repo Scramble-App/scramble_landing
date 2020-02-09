@@ -65,9 +65,10 @@
         </div>
       </div>
     </div>
-    <a id="login-o" class="dot" href="#">Login</a>
+    <a id="login-o" class="dot" href="https://app.scrambleup.com/login/">Login</a>
   </nav>
-</header><div id="login" class="hidden">
+</header>
+<div id="login" class="hidden">
   <div class="login-wrapper">
     <div class="header">
       <div class="logo">
@@ -897,8 +898,9 @@
         <p class="lead"><b>scramble</b> is an invitation-only founder community</p>
       </div>
     </div>
-    <form id="contact_form" name="contact-form" accept-charset="utf-8" action="/send.php" method="post">
-      <input type="text" name="_gotcha" style="display:none" />
+    <!-- <form id="contact_form" name="contact-form" accept-charset="utf-8" action="/send.php" method="post"> -->
+    <form id="contact_form" name="contact-form" accept-charset="utf-8" action="https://api.sendgrid.com/v3/mail/send" method="post">
+        <input type="text" name="_gotcha" style="display:none" />
       <div class="row" style="margin-top: 1.5em;">
         <div class="col-50 mcol-100">
           <p style="padding-right: 8rem;">If&nbsp;you want to&nbsp;learn more about <b>scramble</b> or&nbsp;request a&nbsp;membership, please share your Facebook and LinkedIn profiles with&nbsp;us. We&nbsp;will check in&nbsp;with our current founder&nbsp;members and get back to&nbsp;you!</p>
@@ -954,7 +956,30 @@ form.onsubmit = function (e) {
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     // Send the collected data as JSON
-    xhr.send(JSON.stringify(data));
+    var message = {
+      "personalizations": [
+        {
+          "to": [
+            {
+              "email": "victor@61hub.com"
+            }
+          ],
+          "subject": "New lead from scrambleup.com"
+        }
+      ],
+      "from": {
+        "email": "no-reply@scrambleup.com"
+      },
+      "content": [
+        {
+          "type": "text/plain",
+          "value": `New contact form submittion on scrambleup.com \n ${JSON.stringify(data)}`
+        }
+      ]
+    }
+
+    xhr.send(JSON.stringify(message));
+    // xhr.send(JSON.stringify(data));
 
     // Callback function
     xhr.onloadend = function (response) {
