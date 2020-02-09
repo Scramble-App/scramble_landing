@@ -297,11 +297,13 @@
     }
     function easeInOutQuad(t) { return t<0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
-    (function v_scroll(i) {
+    function v_scroll(i) {
 
       // s0_v_scroll.scrollTo(s0_scroll_x[i-1],0);
       xScrollTo(s0_v_scroll, s0_scroll_x[i-1]);
-    }(s0_v_scroll_current));
+    }
+    
+    v_scroll(s0_v_scroll_current);
 
     [s0_control_left, s0_control_right].forEach(function(item) {
       item.addEventListener('click', function(e) {
