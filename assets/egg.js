@@ -1,3 +1,6 @@
+/*jshint esversion: 6 */
+"use strict";
+
 const imgSize = [800, 800];
 
 const vertex = `
@@ -125,12 +128,12 @@ const fragment = `
   function updateMouse(e) {
     //e.preventDefault();
     if (e.changedTouches && e.changedTouches.length) {
-      e.x = e.changedTouches[0].pageX;
-      e.y = e.changedTouches[0].pageY;
+      e.x = e.changedTouches[0].clientX;
+      e.y = e.changedTouches[0].clientY;
     }
     if (e.x === undefined) {
-      e.x = e.pageX;
-      e.y = e.pageY;
+      e.x = e.clientX;
+      e.y = e.clientY;
     }
     // Get mouse value in 0 to 1 range, with y flipped
     mouse.set(e.x / gl.renderer.width, 1.0 - e.y / gl.renderer.height);
@@ -169,7 +172,7 @@ const fragment = `
     flowmap.aspect = aspect;
     flowmap.mouse.copy(mouse);
     // Ease velocity input, slower when fading out
-    flowmap.velocity.lerp(velocity, velocity.len ? 0.15 : 0.1);
+    flowmap.velocity.lerp(velocity, velocity.len ? 0.5 : 0.3);
     flowmap.update();
     program.uniforms.uTime.value = t * 0.01;
     renderer.render({ scene: mesh });

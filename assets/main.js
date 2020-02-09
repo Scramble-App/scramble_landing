@@ -65,19 +65,53 @@ function init() {
   nav.unshift({title: "Header", href: "#header"});
   nav.push({title: "Bottom", href: "#contact"});
   let waitingOnAnimRequest = false;
-  let animationSelectors = [ 'section'];
+  let animationSelectors = ['section'];
   let nav_side = document.querySelector('nav#side');
   let arrow_up = document.querySelector('nav#side #up');
   let arrow_down = document.querySelector('nav#side #down');
   let header = document.querySelector('header');
   let hh = header.offsetTop + header.offsetHeight;
   // let slide0 = document.querySelector('#header');
+  let logo = document.querySelector('#main .logo a');
   let dots = document.querySelectorAll('#menu .dots span');
+  let links = document.querySelectorAll('#menu .links a');
+  let nav_main = document.querySelector('nav#main');
+  let menu = document.querySelector('#menu');
+  let mc = document.querySelector('a#menu-c');
   let bga = document.querySelector('#bg-animations');
-  
+
   let login = document.querySelector('#login');
   let lo = document.querySelector('#login-o');
   let lc = document.querySelector('#login-c');
+
+  menu.addEventListener('click', function(e){
+    e.preventDefault();
+    
+    nav_main.classList.add('open');
+    // console.log("menu open");
+  });
+  mc.addEventListener('click', function(e){
+    e.preventDefault();
+    nav_main.classList.remove('open');
+    // console.log("x close");
+
+  });
+  links.forEach(item => {
+    item.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      menu.blur();
+      nav_main.classList.toggle('open');
+      // console.log("link close");
+    });
+  });
+  logo.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    menu.blur();
+    nav_main.classList.toggle('open');
+    // console.log("link close");
+  });
 
   lo.addEventListener('click', function(e){
     e.preventDefault();
@@ -105,20 +139,22 @@ function init() {
       // let count=0;
       document.querySelectorAll(selector).forEach(element => {
         const elementHeight = element.offsetHeight;
-        const elementTop = element.offsetTop - windowHeight/3;
+        const elementTop = element.offsetTop - windowHeight/2;
         const elementBottom = element.offsetTop + elementHeight - windowHeight/3;
         if (elementTop > currentScroll) {
           element.classList.remove('scrolled-in');
+          nav_side.classList.remove(element.id);
+          header.classList.remove(element.id);
           if(!next) {next = arrow_down.href = '#'+element.id;}
         }
         else if (elementTop < currentScroll && currentScroll < elementBottom ) {
           bga.className = element.id;
-          nav_side.className = element.id;
-          header.className = element.id;
+          nav_side.classList.add(element.id);
+          header.classList.add(element.id);
           element.classList.add('scrolled-in');
           //Set menu
           let act_count = 0;
-          document.querySelectorAll('#menu .logo a,#menu .links a').forEach(item => {
+          links.forEach(item => {
             if (("#" + element.id).startsWith(item.hash)) {
               item.classList.add('active');
               dots[act_count].classList.add('active');
@@ -133,6 +169,8 @@ function init() {
         }
         else if (elementBottom <= currentScroll) {
           element.classList.remove('scrolled-in');
+          nav_side.classList.remove(element.id);
+          header.classList.remove(element.id);
           prev = arrow_up.href = '#'+element.id;
         }
         // console.log (element.id, elementTop, elementBottom, currentScroll)
@@ -173,3 +211,4 @@ window.addEventListener('load', function () {
     loader.style.zIndex = -10000;
   }, 50);
 }, false);
+

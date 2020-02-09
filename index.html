@@ -27,13 +27,14 @@
   </div>
   <!-- <script src="/assets/loader.js" type="text/javascript"></script> -->
 </div>
-<header id="header" class="scrolled-in">
+<header id="header">
   <nav id="main">
     <div class="logo">
       <a href="#header"><i class="scramble scramble-logo"></i></a>
       <!-- <p class="title">We&nbsp;are a&nbsp;friendly source for additional finance</p> -->
       <p class="title">Introducing supplementary founder financing</p>
     </div>
+    <a id="menu-c" class="dot" href="#"><i class="scramble scramble-cross"></i></a>
     <div id="menu">
       <div>
         <div class="dots">
@@ -236,22 +237,106 @@
         <p class="lead">We&nbsp;provide supplementary financing to&nbsp;founders<br> in&nbsp;a&nbsp;three-step process</p>
       </div>
     </div>
-    <div class="row" >
-      <div class="col-90 mcol-90" style="margin: auto; padding-top: 1rem;">
-        <ol class="dot">
-          <li class="col-33 mcol-100">
-            Platform jointly with member founders forms and develops high-trust founder community
+    <div class="row">
+      <div class="col-90 mcol-90">
+        <ol class="dot v-scroll">
+          <li class="col-33 mcol-66">
+            <p>Platform jointly with member founders forms and develops high-trust founder community</p>
           </li>
-          <li class="col-33 mcol-100" style="padding-bottom: 8em !important;">
-            Platform pre-approves credit limit to&nbsp;each founder based on&nbsp;employability in&nbsp;case current business fails
+          <li class="col-33 mcol-66">
+            <p>Platform pre-approves credit limit to&nbsp;each founder based on&nbsp;employability in&nbsp;case current business fails</p>
           </li>
-          <li class="col-33 mcol-100">
-            Founders decide who is&nbsp;actually funded using mutual repayment guarantees
+          <li class="col-33 mcol-66">
+            <p>Founders decide who is&nbsp;actually funded using mutual repayment guarantees</p>
           </li>
         </ol>
       </div>
     </div>
+    <div class="row d-none controls">
+      <div class="mcol-33">
+        <a href="" id="s_left" data-caption="prev" class="btn-outline-circle"><i class="scramble scramble-arrow-left"></i></a>
+      </div>
+      <div class="mcol-20 info">
+        <span class="">1/3</span>
+      </div>
+      <div class="mcol-33">
+        <a href="" id="s_right" data-caption="next" class="btn-outline-circle"><i class="scramble scramble-arrow-right"></i></a>
+      </div>
+    </div>
   </div>
+  <script type="text/javascript">
+    let s0_control_left = document.querySelector("#solution a#s_left");
+    let s0_control_right = document.querySelector("#solution a#s_right");
+    let s0_control_info = document.querySelector("#solution .info span");
+    let s0_v_scroll = document.querySelector("#solution ol.dot");
+    let s0_controls_targets = document.querySelectorAll("#solution ol.dot>li");
+    
+    let s0_v_scroll_current = 1;
+    let s0_v_scroll_total = s0_controls_targets.length;
+
+    let s0_scroll_x = Array.from(s0_controls_targets, item => item.offsetLeft);
+    
+    // console.log(s0_scroll_x);
+    function xScrollTo(target, to) {
+      const start = target.scrollLeft; // || target.scrollX || target.pageXOffset;
+      const time = Date.now();
+      const duration = 250;//Math.abs(start - to);
+
+      if(duration !== 0) {requestAnimationFrame(step);}
+
+      function step() {
+        var dx = Math.min(1, (Date.now() - time) / duration);
+        var pos = start + (to - start) * easeInOutQuad(dx);
+        target.scrollTo(pos, 0);
+
+        if (dx < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+    }
+    function easeInOutQuad(t) { return t<0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+    function v_scroll(i) {
+
+      // s0_v_scroll.scrollTo(s0_scroll_x[i-1],0);
+      xScrollTo(s0_v_scroll, s0_scroll_x[i-1]);
+    }(s0_v_scroll_current);
+
+    [s0_control_left, s0_control_right].forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        // console.log("in");
+        // console.log(item.dataset.caption);
+        s0_v_scroll_current += item.dataset.caption === "next" ? 1 : -1;
+
+        s0_v_scroll_current = s0_v_scroll_current < 1 ? s0_v_scroll_total : s0_v_scroll_total < s0_v_scroll_current ? 1 : s0_v_scroll_current; 
+
+        v_scroll(s0_v_scroll_current);
+      });
+    });
+    s0_v_scroll.addEventListener('scroll', function(e) {
+      let curr = 1;
+      let x_scroll = e.currentTarget.scrollLeft + e.currentTarget.clientWidth/2;
+      for (let i = 1; i < s0_v_scroll_total; i++) {
+        // if ( x_scroll >= s0_scroll_x[i-1]
+        //   && x_scroll < s0_scroll_x[i] ) {
+        //   curr = i;
+        // }
+        // else
+        if (x_scroll >= s0_scroll_x[i]) {
+          curr = i+1;
+        }
+      }
+      // console.log(curr);
+      s0_v_scroll_current = curr;
+      s0_control_info.innerHTML = curr + " / " + s0_v_scroll_total;
+      s0_controls_targets.forEach(function(target) {
+        target.classList.remove("active");
+      });
+      s0_controls_targets[curr-1].classList.add("active");
+    });
+
+  </script>
 </section>
 <section id="solution1">
   <div class="slide">
@@ -402,7 +487,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-50 mcol-90" style="display: flex; margin-top: -4rem;">
+      <div class="col-50 mcol-90" style="display: flex; align-items: flex-start; margin-top: -4rem;">
         <ul class="sm-dot hidden">
           <li class="col-50 mcol-100">Founders agree to&nbsp;repay for each other if&nbsp;eihter company fails and the other one succeeds</li>
           <li class="col-50 mcol-100">Swaps can be&nbsp;done monthly across all founders on&nbsp;the platform</li>
@@ -411,8 +496,8 @@
         </ul>
         <a class="btn-add"></a>
       </div>
-      <div class="col-10">
-      </div>
+      <!-- <div class="col-10">
+      </div> -->
     </div>
   </div>
   <script type="text/javascript">
@@ -729,7 +814,7 @@
     </div>
     <div class="row">
       <div class="col-100 mcol-100" style="padding-right: 9rem;">
-        <ul class="radio" style="margin-top: 4rem;">
+        <ul class="radio" style="margin-top: 4rem; margin-bottom: 15em;">
           <li class="active">VS early-stage equity investors
             <ul>
               <li class="scramble-notebook">Financing not capped at&nbsp;3-5x monthly revenue&nbsp;&mdash; available up&nbsp;to&nbsp;250x monthly revenue</li>
