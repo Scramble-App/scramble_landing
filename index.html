@@ -34,7 +34,7 @@
       <!-- <p class="title">We&nbsp;are a&nbsp;friendly source for additional finance</p> -->
       <p class="title">Introducing supplementary founder financing</p>
     </div>
-    <a id="menu-c" class="dot" href="#"><i class="scramble scramble-cross"></i></a>
+    <a id="menu-c" class="" href="#"><i class="scramble scramble-cross"></i></a>
     <div id="menu">
       <div>
         <div class="dots">
@@ -65,10 +65,9 @@
         </div>
       </div>
     </div>
-    <a id="login-o" class="dot" href="https://app.scrambleup.com/login/">Login</a>
+    <a id="login-o" class="dot" href="#">Login</a>
   </nav>
-</header>
-<div id="login" class="hidden">
+</header><div id="login" class="hidden">
   <div class="login-wrapper">
     <div class="header">
       <div class="logo">
@@ -146,10 +145,10 @@
       <div class="col-40 mcol-90">
         <div class="row">
           <div class="col-40 mcol-50">
-            <div class="dot"></div>
+            <div class="dot coin"></div>
           </div>
           <div class="d-none mcol-50">
-            <div class="dot"></div>
+            <div class="dot watch"></div>
           </div>
         </div>
       </div>
@@ -183,7 +182,7 @@
     shuffleArray(p_dots_types_list);
 
     p_dots.forEach( function(item, i) {
-      item.classList.add(p_dots_type[p_dots_types_list[i]]);
+      item.classList.contains("coin") || item.classList.contains("watch") ? 0 : item.classList.add(p_dots_type[p_dots_types_list[i]]);
       // let tooltip = document.createElement('span');
       // tooltip.innerHTML = p_dots_tooltip[p_dots_types_list[i]];
       // tooltip.className = "tooltip hide";
@@ -302,7 +301,6 @@
       // s0_v_scroll.scrollTo(s0_scroll_x[i-1],0);
       xScrollTo(s0_v_scroll, s0_scroll_x[i-1]);
     }
-    
     v_scroll(s0_v_scroll_current);
 
     [s0_control_left, s0_control_right].forEach(function(item) {
@@ -354,7 +352,7 @@
     <div id="s1_faces" class="row" style="margin-top: 5rem;"><div class="col-20 mcol-50">
         <div class="btn-face">
           <div class="bg face-1" data-face="url('/assets/img/face1.png')"></div>
-          <video muted playsinline>
+          <video muted playsinline poster="/assets/img/face1.png">
             <source src="/assets/img/bg-yellow/face1.mp4" type="video/mp4"></source>
           </video>
           <!-- <span class="tooltip hide">Hi, I'm James Franco <i class="">1</i></span> -->
@@ -363,7 +361,7 @@
       </div><div class="col-20 mcol-50">
         <div class="btn-face">
           <div class="bg face-6" data-face="url('/assets/img/face6.png')"></div>
-          <video muted playsinline>
+          <video muted playsinline poster="/assets/img/face6.png">
             <source src="/assets/img/bg-yellow/face6.mp4" type="video/mp4"></source>
           </video>
           <!-- <span class="tooltip hide">Hi, I'm <br>Joshua Doe <br><i class="">6</i></span> -->
@@ -372,7 +370,7 @@
       </div><div class="col-20 mcol-50 md-none">
         <div class="btn-face">
           <div class="bg face-3" data-face="url('/assets/img/face3.png')"></div>
-          <video muted playsinline>
+          <video muted playsinline poster="/assets/img/face3.png">
             <source src="/assets/img/bg-yellow/face3.mp4" type="video/mp4"></source>
           </video>
           <!-- <span class="tooltip hide">Hi, I'm Don Franco <i class="">3</i></span> -->
@@ -381,7 +379,7 @@
       </div><div class="col-20 mcol-50 md-none">
         <div class="btn-face">
           <div class="bg face-4" data-face="url('/assets/img/face4.png')"></div>
-          <video muted playsinline>
+          <video muted playsinline poster="/assets/img/face4.png">
             <source src="/assets/img/bg-yellow/face4.mp4" type="video/mp4"></source>
           </video>
           <!-- <span class="tooltip hide">Hi, I'm Felicia Franco <i class="">4</i></span> -->
@@ -390,7 +388,7 @@
       </div><div class="col-20 mcol-50 md-none">
         <div class="btn-face">
           <div class="bg face-5" data-face="url('/assets/img/face5.png')"></div>
-          <video muted playsinline>
+          <video muted playsinline poster="/assets/img/face5.png">
             <source src="/assets/img/bg-yellow/face5.mp4" type="video/mp4"></source>
           </video>
           <!-- <span class="tooltip hide">Hi, I'm <br>Joshua Doe <br><i class="">5</i></span> -->
@@ -455,7 +453,7 @@
           <div class="col-40">
             <div class="btn-face">
               <div class="bg face-1"></div>
-              <video muted playsinline>
+              <video muted playsinline  poster="/assets/img/face1.png">
                 <source src="/assets/img/bg-yellow/face1.mp4" type="video/mp4"></source>
               </video>
             </div>
@@ -463,7 +461,7 @@
           <div class="col-40" style="margin-left: auto">
             <div class="btn-face">
               <div class="bg face-6"></div>
-              <video muted playsinline>
+              <video muted playsinline poster="/assets/img/face6.png">
                 <source src="/assets/img/bg-yellow/face6.mp4" type="video/mp4"></source>
               </video>
             </div>
@@ -507,7 +505,9 @@
     let s2_ul_sm_dot = document.querySelector("#solution2 ul.sm-dot");
     let s2_svg = document.querySelectorAll("#solution2 svg");
     let s2_face_videos = document.querySelectorAll("#solution2 .btn-face video");
-
+    s2_face_videos.forEach(function(v) {
+        v.pause();
+      });
     s2_svg.forEach(function(svg) {
       svg.pauseAnimations();
     });
@@ -584,7 +584,7 @@
             </div>
             <div class="btn-face">
               <div class="bg face-6"></div>
-              <video muted playsinline>
+              <video muted playsinline poster="/assets/img/face6.png">
                 <source src="/assets/img/bg-yellow/face6.mp4" type="video/mp4"></source>
               </video>
             </div>
@@ -607,7 +607,7 @@
             </div>
             <div class="btn-face">
               <div class="bg face-7"></div>
-              <video muted playsinline>
+              <video muted playsinline poster="/assets/img/face7.png">
                 <source src="/assets/img/bg-yellow/face7.mp4" type="video/mp4"></source>
               </video>
             </div>
@@ -630,7 +630,7 @@
             </div>
             <div class="btn-face">
               <div class="bg face-3"></div>
-              <video muted playsinline>
+              <video muted playsinline poster="/assets/img/face3.png">
                 <source src="/assets/img/bg-yellow/face3.mp4" type="video/mp4"></source>
               </video>
             </div>
@@ -640,7 +640,7 @@
       <div class="col-25">
         <div class="btn-face">
           <div class="bg face-1"></div>
-          <video muted playsinline>
+          <video muted playsinline poster="/assets/img/face1.png">
             <source src="/assets/img/bg-yellow/face1.mp4" type="video/mp4"></source>
           </video>
         </div>
@@ -665,7 +665,7 @@
             </div>
             <div class="btn-face">
               <div class="bg face-2"></div>
-              <video muted playsinline>
+              <video muted playsinline poster="/assets/img/face2.png">
                 <source src="/assets/img/bg-yellow/face2.mp4" type="video/mp4"></source>
               </video>
             </div>
@@ -688,7 +688,7 @@
             </div>
             <div class="btn-face">
               <div class="bg face-5"></div>
-              <video muted playsinline>
+              <video muted playsinline poster="/assets/img/face5.png">
                 <source src="/assets/img/bg-yellow/face5.mp4" type="video/mp4"></source>
               </video>
             </div>
@@ -711,7 +711,7 @@
             </div>
             <div class="btn-face">
               <div class="bg face-4"></div>
-              <video muted playsinline>
+              <video muted playsinline poster="/assets/img/face4.png">
                 <source src="/assets/img/bg-yellow/face4.mp4" type="video/mp4"></source>
               </video>
             </div>
@@ -900,9 +900,8 @@
         <p class="lead"><b>scramble</b> is an invitation-only founder community</p>
       </div>
     </div>
-    <!-- <form id="contact_form" name="contact-form" accept-charset="utf-8" action="/send.php" method="post"> -->
-    <form id="contact_form" name="contact-form" accept-charset="utf-8" action="https://api.sendgrid.com/v3/mail/send" method="post">
-        <input type="text" name="_gotcha" style="display:none" />
+    <form id="contact_form" name="contact-form" accept-charset="utf-8" action="/send.php" method="post">
+      <input type="text" name="_gotcha" style="display:none" />
       <div class="row" style="margin-top: 1.5em;">
         <div class="col-50 mcol-100">
           <p style="padding-right: 8rem;">If&nbsp;you want to&nbsp;learn more about <b>scramble</b> or&nbsp;request a&nbsp;membership, please share your Facebook and LinkedIn profiles with&nbsp;us. We&nbsp;will check in&nbsp;with our current founder&nbsp;members and get back to&nbsp;you!</p>
@@ -958,30 +957,7 @@ form.onsubmit = function (e) {
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     // Send the collected data as JSON
-    var message = {
-      "personalizations": [
-        {
-          "to": [
-            {
-              "email": "victor@61hub.com"
-            }
-          ],
-          "subject": "New lead from scrambleup.com"
-        }
-      ],
-      "from": {
-        "email": "no-reply@scrambleup.com"
-      },
-      "content": [
-        {
-          "type": "text/plain",
-          "value": `New contact form submittion on scrambleup.com \n ${JSON.stringify(data)}`
-        }
-      ]
-    }
-
-    xhr.send(JSON.stringify(message));
-    // xhr.send(JSON.stringify(data));
+    xhr.send(JSON.stringify(data));
 
     // Callback function
     xhr.onloadend = function (response) {

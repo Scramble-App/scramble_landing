@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 "use strict";
 
-const imgSize = [800, 800];
+const imgSize = [750, 750];
 
 const vertex = `
       attribute vec2 uv;
@@ -39,7 +39,7 @@ const fragment = `
 {
   const renderer = new ogl.Renderer({ dpr: 2 });
   const gl = renderer.gl;
-  document.querySelector('#bg-animations').appendChild(gl.canvas);
+  const canvas_wrapper = document.querySelector('#bg-animations').appendChild(gl.canvas);
 
   // Variable inputs to control flowmap
   let aspect = 1;
@@ -47,6 +47,9 @@ const fragment = `
   const velocity = new ogl.Vec2();
   function resize() {
     console.log("Resize detected in header");
+
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
     let a1, a2;
     var imageAspect = imgSize[1] / imgSize[0];
     if (window.innerHeight / window.innerWidth > imageAspect) {
