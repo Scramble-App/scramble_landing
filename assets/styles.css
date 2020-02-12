@@ -10,7 +10,7 @@ html { line-height: 1.15; /* 1 */ -webkit-text-size-adjust: 100%; /* 2 */ }
 
 /* Sections ========================================================================== */
 /** Remove the margin in all browsers. */
-body { margin: 0; }
+body { margin: 0; background-color: white; }
 
 /** Render the `main` element consistently in IE. */
 main { display: block; }
@@ -375,7 +375,7 @@ nav#side > div a.btn-outline-circle:hover i { opacity: 0; }
   50% { -webkit-transform: translateY(1rem); transform: translateY(1rem); }
   100% { -webkit-transform: translateY(0); transform: translateY(0); } }
 
-main { padding: 0 2rem 0 4rem; background-color: white; }
+main { padding: 0 2rem 0 4rem; }
 
 canvas { position: absolute; top: 0; left: 0; }
 
@@ -463,7 +463,7 @@ footer .credits { display: none; }
   footer .address { margin-bottom: .5em; -webkit-box-ordinal-group: 3; -ms-flex-order: 2; order: 2; }
   footer .copyright { margin-bottom: .5em; -webkit-box-ordinal-group: 4; -ms-flex-order: 3; order: 3; } }
 
-#bg-animations { position: fixed; display: block; left: 0; top: 0; width: 100vw; height: 100vh; height: calc(var(--vh, 1vh) * 100); overflow: hidden; -webkit-transition: all .25s ease-in-out; transition: all .25s ease-in-out; }
+#bg-animations { position: fixed; z-index: -1; display: block; left: 0; top: 0; width: 100vw; height: 100vh; height: calc(var(--vh, 1vh) * 100); overflow: hidden; -webkit-transition: all .25s ease-in-out; transition: all .25s ease-in-out; }
 
 #bg-animations canvas { display: block; opacity: 0; -webkit-transform: scale(0); transform: scale(0); -webkit-transition: all .25s ease-in-out; transition: all .25s ease-in-out; }
 
