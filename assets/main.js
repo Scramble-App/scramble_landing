@@ -217,6 +217,6 @@ window.addEventListener("resize", function() {
   setTimeout(function () {
     window.scrollTo(0, scrolledTo.offsetTop);
   }, 500);
-  console.log(document.querySelector('section.scrolled-in').offsetTop, document.querySelector('section.scrolled-in'));
+  // console.log(document.querySelector('section.scrolled-in').offsetTop, document.querySelector('section.scrolled-in'));
   document.querySelector('nav#main').classList.remove('open');
 }, false);
