@@ -212,3 +212,11 @@ window.addEventListener('load', function () {
   }, 50);
 }, false);
 
+window.addEventListener("resize", function() {
+  let scrolledTo = document.querySelector('section.scrolled-in');
+  setTimeout(function () {
+    window.scrollTo(0, scrolledTo.offsetTop);
+  }, 500);
+  console.log(document.querySelector('section.scrolled-in').offsetTop, document.querySelector('section.scrolled-in'));
+  document.querySelector('nav#main').classList.remove('open');
+}, false);
