@@ -113,10 +113,10 @@ function init() {
     // console.log("link close");
   });
 
-  lo.addEventListener('click', function(e){
-    e.preventDefault();
-    login.classList.remove('hidden');
-  });
+  // lo.addEventListener('click', function(e){
+  //   e.preventDefault();
+  //   login.classList.remove('hidden');
+  // });
   lc.addEventListener('click', function(e){
     e.preventDefault();
     login.classList.add('hidden');
