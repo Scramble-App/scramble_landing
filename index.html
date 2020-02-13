@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    <a id="login-o" class="dot" href="https://app.scrambleup.com/login/">Login</a>
+    <a id="login-o" class="dot" href="#">Sing in</a>
   </nav>
 </header>
 <div id="login" class="hidden">
@@ -232,7 +232,7 @@
   <div class="slide">
     <div class="row">
       <div class="col-55 mcol-90">
-        <p class="headline"><b>scramble</b> is&nbsp;the founder-driven platform for supplementary financing</p>
+        <p class="headline"><b>Scramble</b> is&nbsp;the founder-driven platform for supplementary financing</p>
       </div>
       <div class="col-33 mcol-90" style="margin: 0.7rem 0 0 -0.6rem;">
         <p class="lead">We&nbsp;provide supplementary financing to&nbsp;founders<br> in&nbsp;a&nbsp;three-step process</p>
@@ -427,7 +427,7 @@
   <div class="slide">
     <div class="row">
       <div class="col-40 mcol-90" style="padding-top: 3rem;">
-        <p class="headline">Mutual repayment guarantee is&nbsp;your calculated bet on&nbsp;the fountders you personally trust</p>
+        <p class="headline">Mutual repayment guarantee is&nbsp;your calculated bet on&nbsp;the founders you personally trust</p>
       </div>
       <div class="col-60 mcol-90" style="margin-bottom: 3em;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 50">
@@ -536,7 +536,8 @@
     <div class="row">
       <div class="col-50 mcol-90" style="position: relative; min-height: 15em;">
         <div class="s3_targets active">
-          <p class="headline">Your financing works well in&nbsp;case of&nbsp;both company success and failure</p>
+          <!-- <p class="headline">Your financing works well in&nbsp;case of&nbsp;both company success and failure</p> -->
+          <p class="headline">Financing remains founder-friendly regardless if&nbsp;your company succeeds or&nbsp;fails</p>
           <p></p>
         </div>
         <div class="s3_targets">
@@ -810,7 +811,7 @@
   <div class="slide">
     <div class="row">
       <div class="col-50 mcol-90" style="padding-right: 5rem;">
-        <p class="headline"><b>scramble</b> fits unique niche relative to&nbsp;classic financing providers</p>
+        <p class="headline"><b>Scramble</b> fits unique niche relative to&nbsp;classic financing providers</p>
       </div>
       <div class="col-50 mcol-90" style="margin-top: 0.5rem;padding-left: 4rem;padding-right: 8rem;">
         <p class="lead">Available when business success is&nbsp;still highly uncertain. Convenient and informal process</p>
@@ -819,21 +820,21 @@
     <div class="row">
       <div class="col-100 mcol-100" style="padding-right: 9rem;">
         <ul class="radio" style="margin-top: 4rem; margin-bottom: 15em;">
-          <li class="active">VS early-stage equity investors
-            <ul>
-              <li class="scramble-notebook">Financing not capped at&nbsp;3-5x monthly revenue&nbsp;&mdash; available up&nbsp;to&nbsp;250x monthly revenue</li>
-              <li class="scramble-shield">Safe in&nbsp;case of&nbsp;business failure&nbsp;&mdash; no&nbsp;hidden charges or&nbsp;&laquo;unconventional&raquo; collection methods</li>
-              <li class="scramble-money">Earliest ﬁnancing available&nbsp;&mdash; only $100+ monthly recurring revenue</li>
-            </ul>
-          </li>
-          <li>VS alternative lenders
+          <li class="active">vs. early-stage investors
             <ul>
               <li class="scramble-coins">10x less expensive</li>
               <li class="scramble-graph">Not limited to&nbsp;the &lsquo;next google/uber&rsquo; technology start-ups</li>
               <li class="scramble-feather">Zero involvement in&nbsp;management</li>
             </ul>
           </li>
-          <li>VS Classic banks
+          <li>vs. alternative lenders
+            <ul>
+              <li class="scramble-notebook">Financing not capped at&nbsp;3-5x monthly revenue&nbsp;&mdash; available up&nbsp;to&nbsp;250x monthly revenue</li>
+              <li class="scramble-shield">Safe in&nbsp;case of&nbsp;business failure&nbsp;&mdash; no&nbsp;hidden charges or&nbsp;&laquo;unconventional&raquo; collection methods</li>
+              <li class="scramble-money">Earliest ﬁnancing available&nbsp;&mdash; only $100+ monthly recurring revenue</li>
+            </ul>
+          </li>
+          <li>vs. classic banks
             <ul>
               <li class="scramble-wallet">Not interested in&nbsp;your personal credit history or&nbsp;assets</li>
               <li class="scramble-notebook">Business can be&nbsp;just three months old and unproﬁtable</li>
@@ -895,15 +896,14 @@
   <div class="slide">
     <div class="row">
       <div class="col-50 mcol-100">
-        <p class="headline">How to contact us?</p>
+        <p class="headline">Want to&nbsp;learn more?</p>
       </div>
        <div class="col-33 mcol-100">
         <p class="lead"><b>scramble</b> is an invitation-only founder community</p>
       </div>
     </div>
-    <!-- <form id="contact_form" name="contact-form" accept-charset="utf-8" action="/send.php" method="post"> -->
-    <form id="contact_form" name="contact-form" accept-charset="utf-8" action="https://api.sendgrid.com/v3/mail/send" method="post">
-        <input type="text" name="_gotcha" style="display:none" />
+    <form id="contact_form" name="contact-form" accept-charset="utf-8" action="/send.php" method="post">
+      <input type="text" name="_gotcha" style="display:none" />
       <div class="row" style="margin-top: 1.5em;">
         <div class="col-50 mcol-100">
           <p style="padding-right: 8rem;">If&nbsp;you want to&nbsp;learn more about <b>scramble</b> or&nbsp;request a&nbsp;membership, please share your Facebook and LinkedIn profiles with&nbsp;us. We&nbsp;will check in&nbsp;with our current founder&nbsp;members and get back to&nbsp;you!</p>
@@ -959,30 +959,7 @@ form.onsubmit = function (e) {
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     // Send the collected data as JSON
-    var message = {
-      "personalizations": [
-        {
-          "to": [
-            {
-              "email": "victor@61hub.com"
-            }
-          ],
-          "subject": "New lead from scrambleup.com"
-        }
-      ],
-      "from": {
-        "email": "no-reply@scrambleup.com"
-      },
-      "content": [
-        {
-          "type": "text/plain",
-          "value": `New contact form submittion on scrambleup.com \n ${JSON.stringify(data)}`
-        }
-      ]
-    }
-
-    xhr.send(JSON.stringify(message));
-    // xhr.send(JSON.stringify(data));
+    xhr.send(JSON.stringify(data));
 
     // Callback function
     xhr.onloadend = function (response) {
