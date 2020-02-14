@@ -193,30 +193,38 @@ function init() {
           waitingOnAnimRequest = true;
       }
   };
+  window.addEventListener('load', function () {
+    let loader = document.querySelector('#loader');
+    let progressBar = loader.querySelector('#progress');
+    
+    progressBar.style.maxWidth = "100%";
+    setTimeout(function () {
+      return document.body.classList.remove('loading');
+    }, 450);
+    // console.log('All done!');
+    setTimeout(function () {
+      loader.style.backgroundColor = "transparent";
+      loader.style.zIndex = -10000;
+    }, 50);
+  }, false);
+  
+  let oldWidth = window.innerWidth;
+  let resizeTimer;
+  window.addEventListener("resize", function() {
+    let scrolledTo = document.querySelector('section.scrolled-in');
+    // console.log(oldWidth);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      // console.log(oldWidth, window.innerWidth);
+      if(oldWidth != window.innerWidth) {
+        oldWidth = window.innerWidth;
+        window.scrollTo(0, scrolledTo.offsetTop);
+      }
+    }, 500);
+    // console.log(document.querySelector('section.scrolled-in').offsetTop, document.querySelector('section.scrolled-in'));
+    document.querySelector('nav#main').classList.remove('open');
+  }, false);
+  
 };
 
 document.addEventListener('DOMContentLoaded', init);
-
-window.addEventListener('load', function () {
-  let loader = document.querySelector('#loader');
-  let progressBar = loader.querySelector('#progress');
-  
-  progressBar.style.maxWidth = "100%";
-  setTimeout(function () {
-    return document.body.classList.remove('loading');
-  }, 450);
-  // console.log('All done!');
-  setTimeout(function () {
-    loader.style.backgroundColor = "transparent";
-    loader.style.zIndex = -10000;
-  }, 50);
-}, false);
-
-window.addEventListener("resize", function() {
-  let scrolledTo = document.querySelector('section.scrolled-in');
-  setTimeout(function () {
-    window.scrollTo(0, scrolledTo.offsetTop);
-  }, 500);
-  // console.log(document.querySelector('section.scrolled-in').offsetTop, document.querySelector('section.scrolled-in'));
-  document.querySelector('nav#main').classList.remove('open');
-}, false);
