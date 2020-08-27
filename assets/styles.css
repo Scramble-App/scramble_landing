@@ -29,6 +29,25 @@
   left: 0;
 }
 
+header nav#main .logo a.cs-main-link {
+  font-size: 0;
+  font-weight: 600;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+
+header.scrolled-in nav#main .logo a.cs-main-link,
+header.header nav#main .logo a.cs-main-link {
+  font-size: 2rem;
+  margin-top: -2rem;
+  opacity: 1;
+  background: #000;
+  color: #FFF;
+  border-radius: 40px;
+  padding: 0.3rem 2rem;
+  text-transform: inherit;
+}
+
 *, *::before, *::after { margin: 0; padding: 0; }
 
 *, *::before, *::after { -webkit-box-sizing: border-box; box-sizing: border-box; }
@@ -852,7 +871,7 @@ section#header .slide { padding-right: 8rem; }
 
 #features .slide ul.dot { padding-left: 4rem; padding-right: 7rem; }
 
-#features .slide ul.dot li { padding-top: 2.5rem; padding-left: 5rem; padding-right: 5rem; }
+#features .slide ul.dot li { padding-top: 2.5rem; padding-left: 5rem; padding-right: 3rem; }
 
 #features .slide ul.dot li p { margin-bottom: 0; }
 
