@@ -60,7 +60,7 @@ document.querySelectorAll("a[href*='#']:not([href='#']):not([class*='carousel'])
 });
 
 function init() {
-  let nav = JSON.parse('[{"title":"Who we are","href":"#about"},{"title":"Problem","href":"#problem"},{"title":"Solution","href":"#solution"},{"title":"Features","href":"#features"},{"title":"Contact us","href":"#contact"}]');
+  let nav = JSON.parse('[{"title":"Who we are","href":"#about"},{"title":"Problem","href":"#problem"},{"title":"Solution","href":"#solution"},{"title":"Features","href":"#features"},{"title":"Ready to start?","href":"#contact"}, {"title":"Contact us","href":"#readytostart"}]');
   nav.unshift({title: "Header", href: "#header"});
   nav.unshift({title: "Header", href: "#header"});
   nav.push({title: "Bottom", href: "#contact"});

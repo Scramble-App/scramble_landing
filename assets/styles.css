@@ -29,6 +29,26 @@
   left: 0;
 }
 
+#contact .slide .headline {
+  margin-bottom: 0.5rem;
+}
+
+#readystart .headline {
+  margin-bottom: 0.5rem;
+}
+
+#readystart .contact-information {
+  margin-top: 3rem;
+}
+
+#readystart .contact-information p {
+  margin-bottom: 0;
+}
+
+#readystart .contact-information a {
+  color: #000;
+}
+
 header nav#main .logo a.cs-main-link {
   font-size: 0;
   font-weight: 600;
