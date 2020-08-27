@@ -5,8 +5,12 @@
   text-align: center;
   padding-right: 5rem;
 }
+#about .cs-tooltip {
+    text-align: center;
+    margin-top: 8rem;
+}
 #about .cs-description {
-  padding: 0;
+  padding: 0 6rem;
 }
 #problem1 .cs-spoiler span {
   position: relative;
