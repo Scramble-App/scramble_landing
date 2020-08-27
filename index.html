@@ -1019,7 +1019,7 @@
             <div class="row" style="margin-top: 5em; margin-right: 4rem;">
               <div class="col-50 mcol-100">
                 <label class="small">Email</label>
-                <input name="email" type="email" placeholder="Enter email">
+                <input name="email" type="email" placeholder="Enter email" required>
               </div>
               <div class="col-50 mcol-100">
                 <label class="small">Name</label>
@@ -1106,10 +1106,13 @@
             button.classList.add("error");
             // formStatus.innerHTML = form.dataset.formError;
 
-          } else if (response.target.status === 400) {
+          } else if (response.target.status === 400 || response.target.status === 500) {
             // Bad Request
             // formStatus.className += ' alert-danger';
             button.classList.add("error");
+            button.innerHTML = "Send";
+            button.disabled = false;
+            button.classList.remove("sending");
             // formStatus.innerHTML = JSON.parse(responseText).error;
 
           } else if (response.target.status === 200) {
