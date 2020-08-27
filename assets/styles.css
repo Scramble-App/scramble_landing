@@ -45,6 +45,10 @@
   margin-bottom: 0;
 }
 
+#readystart {
+  align-items: flex-start;
+}
+
 #readystart .contact-information a {
   color: #000;
 }
