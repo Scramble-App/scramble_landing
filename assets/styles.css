@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 #about .cs-title {
-  font-size: 2.5rem!important;
   text-align: center;
   padding-right: 5rem;
 }
@@ -53,6 +52,18 @@
 
 #readystart {
   align-items: flex-start;
+}
+
+@media (max-width: 479.8px) {
+  #readystart {
+    padding: 10rem 0 20rem;
+  }
+  .cs-getstarted {
+    display: none!important;
+  }
+  #main.open .cs-main-links {
+    display: none!important;
+  }
 }
 
 #readystart .contact-information a {
@@ -835,7 +846,7 @@ section#header .slide { padding-right: 8rem; }
 
 #about { padding-top: 30vh; min-height: 50vh; }
 
-#about .slide { padding-right: 8rem; padding-top: 4rem; padding-bottom: 4rem; margin-top: 2rem; min-height: 30vh; }
+#about .slide { padding-right: 4rem; padding-top: 4rem; padding-bottom: 4rem; margin-top: 2rem; min-height: 30vh; }
 
 #problem .slide .dot { margin: 1em 0; }
 
