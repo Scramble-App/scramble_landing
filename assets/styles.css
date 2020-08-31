@@ -20,14 +20,13 @@
 }
 #problem1 .cs-spoiler span::before {
   content: '';
-  width: 0.25rem;
-  height: 0.25rem;
+  width: 3px;
+  height: 3px;
   background: #000;
   border-radius: 50%;
-  display: block;
-  position: absolute;
-  top: 0.55rem;
-  left: 0;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 2px;
 }
 
 #solution .cs-threecircles {
