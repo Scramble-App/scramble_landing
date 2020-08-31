@@ -5,17 +5,18 @@
   text-align: center;
   padding-right: 5rem;
 }
-#about .cs-tooltip {
-    text-align: center;
-    margin-top: 8rem;
+#about .cs-title span {
+  color: #929292;
 }
-#about .cs-description {
-  padding: 0 6rem;
+#about .cs-tooltip {
+  text-align: left;
+  margin-top: 8rem;
+  color: #929292;
 }
 #problem1 .cs-spoiler span {
   position: relative;
   display: block;
-  padding-left: 7px;
+  padding-left: 15px;
   margin-bottom: unset;
 }
 #problem1 .cs-spoiler span::before {
@@ -28,6 +29,10 @@
   position: absolute;
   top: 0.55rem;
   left: 0;
+}
+
+#solution .cs-threecircles {
+  margin-top: 3rem;
 }
 
 #contact .slide .headline {
@@ -56,20 +61,44 @@
 
 header nav#main .logo a.cs-main-link {
   font-size: 0;
-  font-weight: 600;
+  font-weight: 500;
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
 
+.cs-sponsors-block {
+  background: #191919;
+  padding: 33px 0 0;
+  margin-bottom: 15rem;
+}
+
+.cs-sponsors-title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #FFF;
+
+}
+.cs-sponsors-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: -15px;
+}
+
+.cs-sponsors-item {
+  margin: 15px;
+}
+
 header.scrolled-in nav#main .logo a.cs-main-link,
 header.header nav#main .logo a.cs-main-link {
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   margin-top: -2rem;
   opacity: 1;
   background: #000;
   color: #FFF;
   border-radius: 40px;
-  padding: 0.3rem 2rem;
+  padding: 0.6rem 5rem 0.8rem;
   text-transform: inherit;
 }
 
@@ -549,7 +578,7 @@ footer .credits { display: none; }
 
 #bg-animations.header .dot { display: none; margin: 17vmin calc(50% - 32vmin); padding: 33vmin; -webkit-transform: scale(1); transform: scale(1); opacity: 1; }
 
-#bg-animations.about canvas { opacity: 1; -webkit-transform: scale(1); transform: scale(1); }
+#bg-animations.about canvas { opacity: 0; -webkit-transform: scale(1); transform: scale(1); }
 
 #bg-animations.about .dot { display: none; margin: 17vmin calc(50% - 32vmin); padding: 33vmin; -webkit-transform: scale(1); transform: scale(1); opacity: 1; }
 
@@ -627,9 +656,9 @@ ul.radio > li > ul > li::before { -webkit-box-flex: 0; -ms-flex: 0 0 2rem; flex:
 
 ul.dot, ul.radio, ol.dot, ol.radio { opacity: 0; -webkit-transform: translateY(2rem); transform: translateY(2rem); -webkit-transition: all 0.35s ease-in-out; transition: all 0.35s ease-in-out; }
 
-.scrolled-in .spoiler { font-size: 1em; opacity: 0 !important; line-height: 0; }
+.scrolled-in .spoiler { font-size: 1em; opacity: 0 !important; line-height: 1.45; max-height: 0; }
 
-.scrolled-in .spoiler.more { opacity: 1 !important; font-size: 1em; line-height: 1.45; }
+.scrolled-in .spoiler.more { opacity: 1 !important; font-size: 1em; line-height: 1.45; max-height: 100vh; }
 
 .scrolled-in .spoiler.more + .toggle::before { content: "less"; }
 
