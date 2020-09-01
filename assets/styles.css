@@ -2,6 +2,7 @@
 
 #about h1 {
   padding-right: 5rem;
+  margin-top: 10rem;
 }
 #about h1 span {
   color: #929292;
@@ -10,6 +11,7 @@
   text-align: left;
   margin-top: 2rem;
   color: #929292;
+  padding-right: 12rem;
 }
 #problem1 .cs-spoiler div {
   position: relative;
@@ -28,7 +30,7 @@
 }
 #problem1 .cs-spoiler {
   padding-left: 1rem;
-  padding-right: 1rem;
+  padding-right: 8rem;
 }
 
 #problem1 .toggle {
@@ -64,29 +66,42 @@ header nav#main .logo a.cs-main-link {
 
 .cs-sponsors-block {
   padding: 33px 0 0;
-  margin-top: 30vh;
   width: 100%;
 }
 
 .cs-sponsors-title {
-  text-align: center;
+  text-align: left;
   margin-bottom: 20px;
   color: #929292;
+  padding-right: 4rem;
 }
 
 .cs-sponsors-list {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin: -15px;
   overflow: auto;
   width: 100%;
+  padding-right: 4rem;
 }
 
 .cs-sponsors-item {
   max-width: 8rem;
   min-width: 8rem;
   margin: 15px;
+}
+.cs-sponsors-item-tgs {
+  max-width: 7.2rem;
+  min-width: 7.2rem;
+}
+.cs-sponsors-item-tgs img {
+  padding-top: 1.5rem;
+}
+.cs-sponsors-item-veriff,
+.cs-sponsors-item-estonia {
+  max-width: 6rem;
+  min-width: 6rem;
 }
 
 .cs-sponsors-item img {
@@ -133,6 +148,23 @@ header.header nav#main .logo a.cs-main-link {
 
   .scrolled-in .spoiler.more {
     padding-bottom: 4rem!important;
+  }
+
+  #about .slide {
+    margin: 0!important;
+  }
+  #solution .headline br,
+  #solution .headline br:after {
+    content:' ';
+  }
+  #problem1 .col-66 {
+    margin: 0!important;
+  }
+  .cs-form-row {
+    margin-top: 0!important;
+  }
+  .cs-financing-buttons {
+      margin-top: 27rem;
   }
 }
 
@@ -356,7 +388,7 @@ p.lead { font-size: 1.5em; }
 
 .scrolled-in .slide p.lead { -webkit-transition: all 0.35s ease-in-out .1s; transition: all 0.35s ease-in-out .1s; }
 
-.scrolled-in .spoiler, .scrolled-in p, .scrolled-in span, .scrolled-in ul, .scrolled-in ol, .scrolled-in svg { opacity: 1; -webkit-transform: translateY(0rem); transform: translateY(0rem); -webkit-transition: all 0.35s ease-in-out .2s; transition: all 0.35s ease-in-out .2s; }
+.scrolled-in .cs-sponsors-block, .scrolled-in .spoiler, .scrolled-in p, .scrolled-in span, .scrolled-in ul, .scrolled-in ol, .scrolled-in svg { opacity: 1; -webkit-transform: translateY(0rem); transform: translateY(0rem); -webkit-transition: all 0.35s ease-in-out .2s; transition: all 0.35s ease-in-out .2s; }
 
 form { margin-bottom: 2em; }
 
@@ -692,7 +724,7 @@ ul.dot, ul.radio, ol.dot, ol.radio { opacity: 0; -webkit-transform: translateY(2
 
 .scrolled-in .spoiler { font-size: 1em; opacity: 0 !important; line-height: 1.45; max-height: 0; }
 
-.scrolled-in .spoiler.more { opacity: 1 !important; font-size: 1em; line-height: 1.45; max-height: 100vh; padding-bottom: 1rem; }
+.scrolled-in .spoiler.more { opacity: 1 !important; font-size: 1em; line-height: 1.45; max-height: 1000vh; padding-bottom: 1rem; }
 
 .scrolled-in .spoiler.more + .toggle::before { content: "less"; }
 
@@ -867,9 +899,15 @@ section#header { padding-top: 6rem; min-height: 70vh; }
 
 section#header .slide { padding-right: 8rem; }
 
-#about { min-height: 50vh; }
+#about { margin-top: 30vh; min-height: 50vh; }
 
-#about .slide { padding-right: 4rem; padding-top: 4rem; padding-bottom: 4rem; margin-top: 2rem; min-height: 30vh; }
+#about .slide {
+  margin-left: 10rem;
+  padding-left: 2rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  margin-top: 6rem;
+}
 
 #problem .slide .dot { margin: 1em 0; }
 
