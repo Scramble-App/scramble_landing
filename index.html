@@ -1041,11 +1041,11 @@
             <div class="row cs-form-row" style="margin-top: 5em; margin-right: 4rem;">
               <div class="col-50 mcol-100">
                 <label class="small">Facebook link</label>
-                <input name="fb-link" type="url" placeholder="Enter link">
+                <input name="fb-link" id="fb-link" type="url" placeholder="Enter link" required>
               </div>
               <div class="col-50 mcol-100">
                 <label class="small">LinkedIn link</label>
-                <input name="li-link" type="url" placeholder="Enter link">
+                <input name="li-link" id="li-link" type="url" placeholder="Enter link" required>
               </div>
             </div>
           </div>
@@ -1079,6 +1079,24 @@
   <script>
     var form = document.getElementById('contact_form');
     var button = form.querySelector('button[type=submit].btn-outline-circle');
+    var fbInput = document.getElementById('fb-link');
+    var liInput = document.getElementById('li-link');
+
+    fbInput.onchange = function (e) {
+      if (e.target.value) {
+        liInput.removeAttribute('required');
+      } else {
+        liInput.setAttribute('required', true);
+      }
+    }
+
+    liInput.onchange = function (e) {
+      if (e.target.value) {
+        fbInput.removeAttribute('required');
+      } else {
+        fbInput.setAttribute('required', true);
+      }
+    }
 
     // Append the form status
     var formStatus = document.createElement('div');
