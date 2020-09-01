@@ -14,7 +14,6 @@
 #problem1 .cs-spoiler span {
   position: relative;
   display: block;
-  padding-left: 15px;
   margin-bottom: unset;
 }
 #problem1 .cs-spoiler span::before {
@@ -38,14 +37,6 @@
 
 #solution .cs-threecircles {
   margin-top: 3rem;
-}
-
-#contact .slide .headline {
-  margin-bottom: 0.5rem;
-}
-
-#readystart .headline {
-  margin-bottom: 0.5rem;
 }
 
 #readystart .contact-information {
@@ -84,27 +75,33 @@ header nav#main .logo a.cs-main-link {
 }
 
 .cs-sponsors-block {
-  background: #191919;
   padding: 33px 0 0;
-  margin-bottom: 15rem;
+  margin-bottom: 10rem;
 }
 
 .cs-sponsors-title {
   text-align: center;
-  font-size: 1.5rem;
-  color: #FFF;
-
+  margin-bottom: 20px;
+  color: #929292;
 }
+
 .cs-sponsors-list {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: space-evenly;
   margin: -15px;
 }
 
 .cs-sponsors-item {
+  max-width: 10rem;
+  min-width: 10rem;
   margin: 15px;
+}
+
+.cs-sponsors-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 header.scrolled-in nav#main .logo a.cs-main-link,
@@ -637,7 +634,7 @@ ul.sm-dot > li::before { content: ""; font-family: "scramble" !important; fon
 
 .scrolled-in ul.sm-dot.sm-dot.hidden { opacity: 0; -webkit-transition: width 0.1s ease-in-out .25s, opacity 0.25s ease-in-out; transition: width 0.1s ease-in-out .25s, opacity 0.25s ease-in-out; }
 
-.scrolled-in ul.sm-dot.sm-dot.visible { opacity: 1; width: 100%; height: auto; -webkit-transition: width .1s ease-in-out, opacity 0.25s ease-in-out .1s; transition: width .1s ease-in-out, opacity 0.25s ease-in-out .1s; }
+.scrolled-in ul.sm-dot.sm-dot.visible { margin: 0; opacity: 1; width: 100%; height: auto; -webkit-transition: width .1s ease-in-out, opacity 0.25s ease-in-out .1s; transition: width .1s ease-in-out, opacity 0.25s ease-in-out .1s; }
 
 ol.dot { position: relative; display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; margin-left: 0em; margin-right: -2em; counter-reset: li; list-style: none; }
 
@@ -775,7 +772,7 @@ ul.dot, ul.radio, ol.dot, ol.radio { opacity: 0; -webkit-transform: translateY(2
 
 .btn-outline-image.face-7:hover { background-image: url(/assets/img/face7.png); }
 
-.btn-add { position: relative; display: block; padding-bottom: 4em; padding-left: 2em; -webkit-transform: scale(0); transform: scale(0); -webkit-transition: all 0.35s ease-in-out; transition: all 0.35s ease-in-out; }
+.btn-add { position: relative; display: block; padding-bottom: 4em; padding-left: 5em; -webkit-transform: scale(0); transform: scale(0); -webkit-transition: all 0.35s ease-in-out; transition: all 0.35s ease-in-out; }
 
 .btn-add::after { cursor: pointer; position: absolute; content: ""; font-family: "scramble" !important; font-weight: 400; font-size: 2rem; line-height: 1.5em; text-align: center; left: calc(50% - .75em); bottom: .5em; width: 1.5em; height: 1.5em; border-radius: 100%; border: 2px solid #fcd11b; color: black; background-color: #fcd11b; -webkit-transition: all 0.35s ease-in-out; transition: all 0.35s ease-in-out; }
 
