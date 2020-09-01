@@ -1,15 +1,14 @@
 @charset "UTF-8";
 
-#about .cs-title {
-  text-align: center;
+#about h1 {
   padding-right: 5rem;
 }
-#about .cs-title span {
+#about h1 span {
   color: #929292;
 }
 #about .cs-tooltip {
   text-align: left;
-  margin-top: 8rem;
+  margin-top: 2rem;
   color: #929292;
 }
 #problem1 .cs-spoiler span {
@@ -27,6 +26,14 @@
   display: inline-block;
   margin-right: 5px;
   margin-bottom: 2px;
+}
+#problem1 .cs-spoiler {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#problem1 .toggle {
+  margin-left: 1rem;
 }
 
 #solution .cs-threecircles {
@@ -102,13 +109,13 @@ header nav#main .logo a.cs-main-link {
 
 header.scrolled-in nav#main .logo a.cs-main-link,
 header.header nav#main .logo a.cs-main-link {
-  font-size: 1.7rem;
-  margin-top: -2rem;
+  font-size: 1.1rem;
+  margin-top: 11rem;
   opacity: 1;
   background: #000;
   color: #FFF;
   border-radius: 40px;
-  padding: 0.6rem 5rem 0.8rem;
+  padding: 0.6rem 4rem 0.8rem;
   text-transform: inherit;
 }
 
@@ -129,7 +136,7 @@ body { margin: 0; background-color: white; }
 main { display: block; }
 
 /** Correct the font size and margin on `h1` elements within `section` and `article` contexts in Chrome, Firefox, and Safari. */
-h1 { font-size: 2em; margin: 0.67em 0; }
+h1 { font-size: 2.5rem; font-weight: 600; margin: 0.67em 0; }
 
 /* Grouping content ========================================================================== */
 /** 1. Add the correct box sizing in Firefox. 2. Show the overflow in Edge and IE. */
