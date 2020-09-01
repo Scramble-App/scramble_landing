@@ -615,8 +615,8 @@
 
   <section id="solution3">
     <div class="slide">
-      <div class="row">
-        <div class="col-50 mcol-90" style="position: relative; min-height: 15em;">
+      <div class="row cs-financing">
+        <div class="col-50 mcol-90 cs-financing-block" style="position: relative; min-height: 15em;">
           <div class="s3_targets active">
             <!-- <p class="headline">Your financing works well in&nbsp;case of&nbsp;both company success and failure</p> -->
             <p class="headline">Financing remains founder-friendly regardless if&nbsp;your company succeeds or&nbsp;fails</p>
@@ -1088,7 +1088,6 @@
     form.onsubmit = function (e) {
       // Stop the regular form submission
       e.preventDefault();
-
       button.disabled = true;
       button.classList.add("sending");
       button.innerHTML = "Sending...";

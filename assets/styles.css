@@ -163,8 +163,15 @@ header.header nav#main .logo a.cs-main-link {
   .cs-form-row {
     margin-top: 0!important;
   }
-  .cs-financing-buttons {
-      margin-top: 27rem;
+
+  #solution3 .cs-financing {
+    flex-direction: column-reverse;
+  }
+  #solution3 .cs-financing-block {
+    margin-top: 14rem;
+  }
+  #solution4 {
+    padding-top: 30rem;
   }
 }
 
