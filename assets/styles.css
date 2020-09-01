@@ -51,18 +51,6 @@
   align-items: flex-start;
 }
 
-@media (max-width: 479.8px) {
-  #readystart {
-    padding: 10rem 0 20rem;
-  }
-  .cs-getstarted {
-    display: none!important;
-  }
-  #main.open .cs-main-links {
-    display: none!important;
-  }
-}
-
 #readystart .contact-information a {
   color: #000;
 }
@@ -76,7 +64,8 @@ header nav#main .logo a.cs-main-link {
 
 .cs-sponsors-block {
   padding: 33px 0 0;
-  margin-bottom: 10rem;
+  margin-top: 30vh;
+  width: 100%;
 }
 
 .cs-sponsors-title {
@@ -90,6 +79,8 @@ header nav#main .logo a.cs-main-link {
   align-items: center;
   justify-content: space-evenly;
   margin: -15px;
+  overflow: auto;
+  width: 100%;
 }
 
 .cs-sponsors-item {
@@ -114,6 +105,26 @@ header.header nav#main .logo a.cs-main-link {
   border-radius: 40px;
   padding: 0.6rem 4rem 0.8rem;
   text-transform: inherit;
+}
+
+@media (max-width: 479.8px) {
+  #readystart {
+    padding: 10rem 0 20rem;
+  }
+  .cs-getstarted {
+    display: none!important;
+  }
+  #main.open .cs-main-links {
+    display: none!important;
+  }
+
+  h1 {
+    font-size: 5rem!important;
+  }
+
+  .cs-sponsors-title {
+    font-size: 3rem;
+  }
 }
 
 *, *::before, *::after { margin: 0; padding: 0; }
@@ -847,7 +858,7 @@ section#header { padding-top: 6rem; min-height: 70vh; }
 
 section#header .slide { padding-right: 8rem; }
 
-#about { padding-top: 30vh; min-height: 50vh; }
+#about { min-height: 50vh; }
 
 #about .slide { padding-right: 4rem; padding-top: 4rem; padding-bottom: 4rem; margin-top: 2rem; min-height: 30vh; }
 
