@@ -10,4 +10,4 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - .:/www/data
     ports:
-      - "8888:80"
+      - "80:80"
