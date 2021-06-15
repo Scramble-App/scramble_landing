@@ -1123,7 +1123,13 @@
 </nav>
 <footer>
   <div class="logo"><i class="scramble scramble-logo"></i></div>
-  <div class="copyright muted">&copy; 2020 scramble. All rights reserved</div>
+  <div class="copyright muted">&copy; <span id="year"></span> scramble. All rights reserved</div>
+  <script>
+    const date = new Date();
+    const currentYear = date.getFullYear();
+    let year = document.querySelector("#year");
+    year.innerHTML = currentYear;
+  </script>
   <div class="address muted">Scramble OÜ (registry code: 14991448) Pärnu mnt 22, 10141 Tallinn, Estonia</div>
   <ul class="social">
     <li><a href="https://www.facebook.com/ScrambleUpCom/" target="_blank" rel="noopener"><i
